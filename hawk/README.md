@@ -28,8 +28,11 @@ Nmap Scan
     Discovered open port 21/tcp on 10.10.10.102
     Discovered open port 22/tcp on 10.10.10.102
     Discovered open port 80/tcp on 10.10.10.102
-    Discovered open port 5435/tcp on 10.10.10.102
+    Discovered open port 8082/tcp on 10.10.10.102
     
-**[*] We have 4 open ports, 21, 22, 80 and 5435.**
+**[*] We have 4 open ports, 21, 22, 80 and 8082.**
 
 
+Check Version
+----
+[![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543658236-capture-du-2018-12-01-10-56-49.png)](https://hackthebox.eu/)
