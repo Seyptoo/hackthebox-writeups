@@ -30,4 +30,4 @@ Nmap Scan
     Discovered open port 80/tcp on 10.10.10.102
     Discovered open port 5435/tcp on 10.10.10.102
     
-   
+**We have 4 open ports, 21, 22, 80 and 5435.**
