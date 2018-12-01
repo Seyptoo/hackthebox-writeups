@@ -160,8 +160,8 @@ We have to login in SSH, go to var /www/html/sites/default/
 
 We have to connect in SSH, with user daniel.
 Credentials SSH :
-> Username : daniel<br/>
-> Password : drupal4hawk
+> Username : **daniel**<br/>
+> Password : **drupal4hawk**
 
     root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ssh daniel@10.10.10.102
     daniel@10.10.10.102's password: 
@@ -196,4 +196,55 @@ Credentials SSH :
     >>> import pty
     >>> pty.spawn('/bin/bash')
     daniel@hawk:~$ 
+   
+PrivEsc solutions
+----
+We will see the open services in the target machine
+
+    daniel@hawk:/tmp$ netstat -lapt
+    (Not all processes could be identified, non-owned process info
+     will not be shown, you would have to be root to see it all.)
+    Active Internet connections (servers and established)
+    Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+    tcp        0      0 localhost.localdo:mysql 0.0.0.0:*               LISTEN      -                   
+    tcp        0      0 localhost:domain        0.0.0.0:*               LISTEN      -                   
+    tcp        0      0 0.0.0.0:ssh             0.0.0.0:*               LISTEN      -                   
+    tcp        0      0 hawk:ssh                10.10.15.190:46050      ESTABLISHED -                   
+    tcp        0      0 hawk:50780              10.10.13.144:4444       ESTABLISHED -                   
+    tcp        0      0 hawk:48804              10.10.13.26:1234        CLOSE_WAIT  -                   
+    tcp        0      1 hawk:50294              4.2.2.2:domain          SYN_SENT    -                   
+    tcp        0    612 hawk:ssh                10.10.13.26:54668       ESTABLISHED -                   
+    tcp        0      0 localhost.localdo:46646 localhost.localdom:8082 TIME_WAIT   -                   
+    tcp        0      0 hawk:ssh                10.10.15.190:46204      ESTABLISHED -                   
+    tcp        0      0 localhost.localdo:46644 localhost.localdom:8082 TIME_WAIT   -                   
+    tcp        0      1 hawk:50288              4.2.2.2:domain          SYN_SENT    -                   
+    tcp        0      0 hawk:49006              10.10.13.26:1234        CLOSE_WAIT  -                   
+    tcp6       0      0 [::]:9092               [::]:*                  LISTEN      -                   
+    tcp6       0      0 [::]:http               [::]:*                  LISTEN      -                   
+    tcp6       0      0 [::]:8082               [::]:*                  LISTEN      -                   
+    tcp6       0      0 [::]:ftp                [::]:*                  LISTEN      -                   
+    tcp6       0      0 [::]:ssh                [::]:*                  LISTEN      -                   
+    tcp6       0      0 [::]:5435               [::]:*                  LISTEN      -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56196      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56190      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56186      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56202      ESTABLISHED -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56204      SYN_RECV    -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56194      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56198      TIME_WAIT   -                   
+    tcp6       0      0 hawk:8082               10.10.15.200:36304      TIME_WAIT   -                   
+    tcp6       1      0 hawk:http               10.10.13.26:34482       CLOSE_WAIT  -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56208      SYN_RECV    -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56192      TIME_WAIT   -                   
+    tcp6       1      0 hawk:http               10.10.15.200:56086      CLOSE_WAIT  -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56200      TIME_WAIT   -                   
+    tcp6       1      0 hawk:http               10.10.13.26:34850       CLOSE_WAIT  -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56178      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56170      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56180      TIME_WAIT   -                   
+    tcp6       0      0 hawk:http               10.10.15.200:56206      SYN_RECV    -                   
+
+We are going to exploit port 8082 you just have to install this tools to be root https://www.exploit-db.com/exploits/45506
+
+[![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543665462-capture-du-2018-12-01-12-57-30.png)](https://hackthebox.eu)
 
