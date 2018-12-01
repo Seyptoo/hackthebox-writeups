@@ -80,6 +80,8 @@ The file this name .drupal.txt.enc, it is probably a password to access the CMS 
 
 Cracking file
 ----
+Everything is encrypted, we will use a tool to crack this file.
+
     root@Seyptoo:~/writeup/hawk# cat .drupal.txt.enc 
     U2FsdGVkX19rWSAG1JNpLTawAmzz/ckaN1oZFZewtIM+e84km3Csja3GADUg2jJb
     CmSdwTtr/IIShvTbUd0yQxfe9OuoMxxfNIUN/YPHx+vVw/6eOD+Cc1ftaiNUEiQz
@@ -90,5 +92,35 @@ Cracking file
     ���������8?�sW�j#T$3AG�,f	���Z\ja�>>G6
     �.��E���ÐV��V@�����ɗ���4�����@�w�xZ��Ni��PtF��`)
     root@Seyptoo:~/writeup/hawk#
-    
+The file is in base64, we are going to the tools on github.
+
+    root@Seyptoo:~/writeup/hawk# git clone https://github.com/deltaclock/go-openssl-bruteforce.git
+    Clonage dans 'go-openssl-bruteforce'...
+    remote: Enumerating objects: 31, done.
+    remote: Total 31 (delta 0), reused 0 (delta 0), pack-reused 31
+    Dépaquetage des objets: 100% (31/31), fait.
+    Vérification de la connectivité... fait.
+    root@Seyptoo:~/writeup/hawk# cd go-openssl-bruteforce/
+    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ls
+    brute.go  openssl-brute  README.md
+    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ./openssl-brute -file ../drupal.txt.enc
+    Bruteforcing Started
+    CRACKED!! Results in file [ result-aes256 ]
+    --------------------------------------------------
+    Found password [ friends ] using [ aes256 ] algorithm!!
+    --------------------------------------------------
+    Daniel,
+
+    Following the password for the portal:
+
+    "PencilKeyboardScanner123"
+
+    Please let us know when the portal is ready.
+
+    Kind Regards,
+
+    IT department
+
+    --------------------------------------------------
+The password has been cracked successfully, so we can connect to the CMS (drupal).
 
