@@ -127,7 +127,7 @@ The password has been cracked successfully, so we can connect to the CMS (drupal
 Website reverse shell
 ----
 Try a default user, like admin and it should do the trick to connect to the CMS.
-User : **admin**
-Password : **PencilKeyboardScanner123**
+> User : **admin**
+> Password : **PencilKeyboardScanner123**
 
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543661418-capture-du-2018-12-01-11-50-07.png)](https://hackthebox.eu)
