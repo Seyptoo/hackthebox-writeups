@@ -157,3 +157,10 @@ We have to login in SSH, go to var /www/html/sites/default/
     www-data@hawk:/var/www/html/sites/default$ grep password -r .
     
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543664102-capture-du-2018-12-01-12-31-37.png)](https://hackthebox.eu)
+
+We have to connect in SSH, with user daniel.
+Credentials SSH :
+> Username : daniel<br/>
+> Password : drupal4hawk
+
+    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ssh daniel@10.10.10.102  
