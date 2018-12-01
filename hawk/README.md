@@ -131,3 +131,5 @@ Try a default user, like admin and it should do the trick to connect to the CMS.
 Password : **PencilKeyboardScanner123**
 
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543661418-capture-du-2018-12-01-11-50-07.png)](https://hackthebox.eu)
+
+Once you are logged in you have to go to modules, and activate **PHP filter**.
