@@ -42,6 +42,9 @@ access anonymously.**
 
 FTP Access and transfert
 ----
+**We have access to the FTP server, we can see that there is a hidden file and we transfer it to our physical machine.**
+The file this name .drupal.txt.enc, it is probably a password to access the CMS drupal. :)
+
     root@Seyptoo:~/writeup/hawk# ftp 10.10.10.102
     Connected to 10.10.10.102.
     220 (vsFTPd 3.0.3)
@@ -74,6 +77,3 @@ FTP Access and transfert
     226 Transfer complete.
     240 bytes received in 0.00 secs (513.9802 kB/s)
     ftp> 
-
-**We have access to the FTP server, we can see that there is a hidden file and we transfer it to our physical machine.**
-
