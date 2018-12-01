@@ -132,5 +132,5 @@ Password : **PencilKeyboardScanner123**
 
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543661418-capture-du-2018-12-01-11-50-07.png)](https://hackthebox.eu)
 
-Once you are logged in you have to go to modules, and activate **PHP filter**.<br\>
+Once you are logged in you have to go to modules, and activate **PHP filter**.<br/>
 Once you have activated the module go to **Content, add content, Basic page, and put your PHP code**, go take the code pentestmonkey. :)
