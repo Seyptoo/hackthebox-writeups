@@ -163,4 +163,37 @@ Credentials SSH :
 > Username : daniel<br/>
 > Password : drupal4hawk
 
-    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ssh daniel@10.10.10.102  
+    root@Seyptoo:~/writeup/hawk/go-openssl-bruteforce# ssh daniel@10.10.10.102
+    daniel@10.10.10.102's password: 
+    Welcome to Ubuntu 18.04 LTS (GNU/Linux 4.15.0-23-generic x86_64)
+
+     * Documentation:  https://help.ubuntu.com
+     * Management:     https://landscape.canonical.com
+     * Support:        https://ubuntu.com/advantage
+
+      System information as of Sat Dec  1 11:40:21 UTC 2018
+
+      System load:  0.12              Processes:            125
+      Usage of /:   54.1% of 9.78GB   Users logged in:      1
+      Memory usage: 54%               IP address for ens33: 10.10.10.102
+      Swap usage:   0%
+
+
+     * Canonical Livepatch is available for installation.
+       - Reduce system reboots and improve kernel security. Activate at:
+         https://ubuntu.com/livepatch
+
+    55 packages can be updated.
+    3 updates are security updates.
+
+    Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+    Last login: Sat Dec  1 11:39:51 2018 from 10.10.13.26
+    Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
+    [GCC 7.3.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import pty
+    >>> pty.spawn('/bin/bash')
+    daniel@hawk:~$ 
+
