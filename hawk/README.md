@@ -9,8 +9,11 @@ Informations
     
 Nmap Scan
 ----
-    root@Seyptoo:~/writeup/hawk# nmap -A -sT -p 1-65535 -oA nmap/hawk 10.10.10.102 -v
+**We have 4 open ports, 21, 22, 80 and 8082.**
+The 21 is for the FTP server, 22 for the SSH server, for the 80 HTTTP server (Drupal CMS) and finally for the 8082 for the 
+database.
 
+    root@Seyptoo:~/writeup/hawk# nmap -A -sT -p 1-65535 -oA nmap/hawk 10.10.10.102 -v
     Starting Nmap 7.01 ( https://nmap.org ) at 2018-12-01 10:50 CET
     NSE: Loaded 132 scripts for scanning.
     NSE: Script Pre-scanning.
@@ -30,9 +33,6 @@ Nmap Scan
     Discovered open port 80/tcp on 10.10.10.102
     Discovered open port 8082/tcp on 10.10.10.102
     
-**[*] We have 4 open ports, 21, 22, 80 and 8082.**
-
-
 Check Version
 ----
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543658376-capture-du-2018-12-01-10-59-23.png)](https://hackthebox.eu)
