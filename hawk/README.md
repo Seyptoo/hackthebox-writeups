@@ -77,3 +77,16 @@ The file this name .drupal.txt.enc, it is probably a password to access the CMS 
     226 Transfer complete.
     240 bytes received in 0.00 secs (513.9802 kB/s)
     ftp> 
+
+Cracking file
+----
+    root@Seyptoo:~/writeup/hawk# cat .drupal.txt.enc 
+    U2FsdGVkX19rWSAG1JNpLTawAmzz/ckaN1oZFZewtIM+e84km3Csja3GADUg2jJb
+    CmSdwTtr/IIShvTbUd0yQxfe9OuoMxxfNIUN/YPHx+vVw/6eOD+Cc1ftaiNUEiQz
+    QUf9FyxmCb2fuFoOXGphAMo+Pkc2ChXgLsj4RfgX+P7DkFa8w1ZA9Yj7kR+tyZfy
+    t4M0qvmWvMhAj3fuuKCCeFoXpYBOacGvUHRGywb4YCk=
+    root@Seyptoo:~/writeup/hawk# cat .drupal.txt.enc|base64 -d
+    Salted__kY ԓi-6�l���7Z����>{�$�p����5 �2[
+    ���������8?�sW�j#T$3AG�,f	���Z\ja�>>G6
+    �.��E���ÐV��V@�����ɗ���4�����@�w�xZ��Ni��PtF��`)
+    root@Seyptoo:~/writeup/hawk#
