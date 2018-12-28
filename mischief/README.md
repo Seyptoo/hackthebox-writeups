@@ -233,6 +233,8 @@ AND BIM REVERSE SHELL ! :D
     root@Mischief:~# wc -l /root/root.txt
     wc -l /root/root.txt
     1 /root/root.txt
-    root@Mischief:~#
+    root@Mischief:~# cat /root/root.txt
+    The flag is not here, get a shell to find it!
+    root@Mischief:~# find / -type f -name "root.txt" -exec cat {} \; -print 2>/dev/null
     
 Do not hesitate to put a star in my repository and follow me it will make me serious pleasure! :D
