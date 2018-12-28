@@ -237,5 +237,8 @@ AND BIM REVERSE SHELL ! :D
     The flag is not here, get a shell to find it!
     root@Mischief:~# find / -type f -name "root.txt" -exec cat {} \; -print 2>/dev/null
     *****fad479c56f912c65d7be4487807
+    /usr/lib/gcc/x86_64-linux-gnu/7/root.txt
+    The flag is not here, get a shell to find it!
+    /root/root.txt
     
 Do not hesitate to put a star in my repository and follow me it will make me serious pleasure! :D
