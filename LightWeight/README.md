@@ -1,7 +1,5 @@
 # LightWeight writeups by Seyptoo.
 
-[![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/52/7/1546173750-capture-du-2018-12-30-13-39-28.png)](https://hackthebox.eu/)
-
 [![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/52/7/1546159641-capture-du-2018-12-30-09-47-09.png)](https://hackthebox.eu/)
 
 Informations
@@ -51,6 +49,8 @@ Parfaits nous sommes connectés au serveur SSH mais pas en tant qu'utilisateurs.
     [10.10.12.232@lightweight ~]$ 
 
 > L'options **-l** pour **login_name**. Le nom d'utilisateur ou quoi.
+
+[![forthebadge made-with-python](http://image.noelshack.com/fichiers/2018/52/7/1546173750-capture-du-2018-12-30-13-39-28.png)](https://hackthebox.eu/)
 
 Nous allons simplement voir les utilisateurs dans le serveur avec la commande **awk**.
 
