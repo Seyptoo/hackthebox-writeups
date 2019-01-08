@@ -39,10 +39,10 @@ Si nous regardons la source de la page il y'a des informations. Il y'a un fichie
         
 Il y'a des fonctions sur le fichier javascript. Donc nous avons trouver plusieurs fichiers PHP.
 
-fileWrite.php (Fichier pour créer des listes) Paramètre = listnum=&data=<br />
-fileDelete.php (Fichier pour supprimer des listes) Paramètre = listnum=<br />
-fileRead.php (Fichier pour lire des fichiers sensibles) Paramètre = file=<br />
-dirRead.php (Fichier pour lire les répértoires) path=<br />
+fileWrite.php (Fichier pour créer des listes) Paramètre : listnum=&data=<br />
+fileDelete.php (Fichier pour supprimer des listes) Paramètre : listnum=<br />
+fileRead.php (Fichier pour lire des fichiers sensibles) Paramètre : file=<br />
+dirRead.php (Fichier pour lire les répértoires) Paramètre : path=<br />
 
 On va plus s'intéréssé au fichier fileRead.php et dirRead.php ils sont beaucoup plus utiles.
 
