@@ -201,7 +201,7 @@ Le PrivEsc n'est pas très compliqué regardons le fichier authorized_keys.
     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzuzK0MT740dpYH17403dXm3UM/VNgdz7ijwPfraXk3B/oKmWZHgkfqfg1xx2bVlT6oHvuWLxk6/KYG0gRjgWbTtfg+q3jN40F+opaQ5zJXVMtbp/zuzQVkGFgCLMas014suEHUhkiOkNUlRtJcbqzZzECV7XhyP6mcSJFOzIyKrWckJJ0YJz+A2lb8AA0g3i9b0qyUuqIAQMl9yFjnmwInnXrZj34jXHOoXx71vXbBVeKu82jw8sacUlXDpIeGY8my572+MAh4f6f7leRtzz/qlx6jCqz26NGQ3Mf1PWUmrgXHVW+L3cNqrdtnd2EghZpZp+arOD6NJOFJY4jBHvfmonitor@waldo
     waldo:~/.ssh$
 
-Nous avons un utillisateur on va essayer de se reconnecter avec la même clé SSH à l'utilisatuer monitor.
+Nous avons un utillisateur on va essayer de se reconnecter avec la même clé SSH à l'utilisateur monitor.
 
     waldo:~/.ssh$ ssh -i .monitor monitor@localhost
     Last login: Tue Jan  8 14:01:44 2019 from 127.0.0.1
