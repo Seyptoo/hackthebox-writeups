@@ -116,8 +116,46 @@ Et la sortie du fichier :
     28,"backup_admin","admin",1,"08/23/18 21:14:02",26,
     root@Computer:~/htb/writeup/Access#
 
-Parfait nous avons des identifiants, énumerer plus.
+Parfait nous avons des identifiants. Les mots de passes trouvé peut correspondre au fichier ZIP que nous allons extraire sous Linux.
 
 Archive ZIP
 ----
+    root@Computer:~/htb/writeup/Access# unzip Access\ Control.zip 
+    Archive:  Access Control.zip
+       skipping: Access Control.pst      unsupported compression method 99
+    root@Computer:~/htb/writeup/Access#
 
+Donc visiblement le programme ne peut pas supporter donc après avoir chercher sur le web pendant beaucoup de temps nous allons essayer avec le programme 7zip, et essayer d'extraire ce fichier.
+
+    root@Computer:~/htb/writeup/Access# 7z x Access\ Control.zip 
+
+    7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+    p7zip Version 9.20 (locale=fr_FR.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+
+    Processing archive: Access Control.zip
+
+    Extracting  Access Control.pst
+    Enter password (will not be echoed) :
+
+
+    Everything is Ok
+
+    Size:       271360
+    Compressed: 10870
+    root@Computer:~/htb/writeup/Access#
+    
+Parfait avec l'outil 7z, l'extraction fonctionne parfaitement il suffit d'utiliser l'option 'x' pour extraire les fichiers. Donc ça été extrait avec succès donc à la sortie nous avons un fichier pst.
+
+Donc ce fichier il y'a rien de spécial, un code inintellegible. Donc pour lire un fichier PST, vous devez installé readpst. avec la commande apt.
+
+    sudo apt-get install libgsf-1-dev libboost-python-dev
+
+Pour lire le fichier donc il faut tapé la commande ci-dessous :
+
+    root@Computer:~/htb/writeup/Access# readpst Access\ Control.pst -o .
+    Opening PST file and indexes...
+    Processing Folder "Deleted Items"
+            "Access Control" - 2 items done, 0 items skipped.
+    root@Computer:~/htb/writeup/Access#
+
+Parfait donc le programme à réussis a lire le fichier PST, visiblement c'est un fichier HTML, donc essayer de voir cela.
