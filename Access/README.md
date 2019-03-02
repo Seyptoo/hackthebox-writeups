@@ -116,5 +116,5 @@ Et la sortie du fichier :
     28,"backup_admin","admin",1,"08/23/18 21:14:02",26,
     root@Computer:~/htb/writeup/Access#
 
-Parfait nous avons des identifiants, alors si vous souhaitez utilisé mon outils n'oublie pas de mettre le nom du fichier.\n
+Parfait nous avons des identifiants, alors si vous souhaitez utilisé mon outils n'oublie pas de mettre le nom du fichier. <br />
 **bash server.sh backup.mdb**
