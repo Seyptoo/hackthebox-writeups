@@ -367,6 +367,9 @@ Shell > User.txt
     www-data@frolic:/home/ayush$ wc -c user.txt
     33 user.txt
    
+Privesc > Root.txt
+----
+
 Voilà nous avons accès en tant que www-data nous avons un shell.
 
     www-data@frolic:/home$ find / -type f -perm -4000 -print 2>/dev/null
