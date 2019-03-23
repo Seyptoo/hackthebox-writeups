@@ -44,3 +44,24 @@ HTTP 9999
 N'oubliez pas d'attribuer le domaine sur le fichier /etc/hosts. Pour justement avoir accéder à la box et au serveur HTTP sans problème.
 [![forthebadge made-with-python](https://media.discordapp.net/attachments/556442801085218827/558951107431235596/unknown.png)
 
+    root@Computer:~/htb/box/Frolic/gobuster# /usr/bin/gobuster -w /usr/share/wordlist/directory-list-2.3-medium.txt -u http://frolic.htb:9999/ -x php,html -o output_file
+
+    Gobuster v1.4.1              OJ Reeves (@TheColonial)
+    =====================================================
+    =====================================================
+    [+] Mode         : dir
+    [+] Url/Domain   : http://frolic.htb:9999/
+    [+] Threads      : 10
+    [+] Wordlist     : /usr/share/wordlist/directory-list-2.3-medium.txt
+    [+] Output file  : output_file
+    [+] Status codes : 204,301,302,307,200
+    [+] Extensions   : .php,.html
+    =====================================================
+    /admin (Status: 301)
+    /test (Status: 301)
+    /dev (Status: 301)
+
+Comme vous pouvez le voir il y'a un dossier /admin, /test, /backup et /dev, nous allons un peu regarder le dossier /admin de plus près.
+
+
+
