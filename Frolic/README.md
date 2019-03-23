@@ -68,6 +68,9 @@ Comme vous pouvez le voir il y'a un dossier /admin, /test, /backup et /dev, nous
 Comme vous pouvez le voir, il y'a un fichier javascript /login.js donc dans ce fichier il y'a sans doute le nom d'utilisateur et le mot de passe.
 
 
-
-
+    root@Computer:~/htb/box/Frolic/gobuster# curl http://10.10.10.111:9999/admin/js/login.js -s
+    [...SNIP...]
+    if ( username == "admin" && password == "superduperlooperpassword_lol"){
+    alert ("Login successfully");
+    [...SNIP...]
 
