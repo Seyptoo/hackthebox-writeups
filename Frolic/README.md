@@ -1,6 +1,6 @@
 # Access writeups by Seyptoo.
 
-[![forthebadge made-with-python](https://image.noelshack.com/fichiers/2019/12/6/1553333910-capture-du-2019-03-23-10-37-40.png)
+[forthebadge made-with-python](https://image.noelshack.com/fichiers/2019/12/6/1553333910-capture-du-2019-03-23-10-37-40.png)
 
 Informations
 ----
@@ -42,5 +42,5 @@ Alors il y'a 4 ports open, le 22 pour le SSH, le 139 et 445 pour le Samba, et le
 HTTP 9999
 ----
 N'oubliez pas d'attribuer le domaine sur le fichier /etc/hosts. Pour justement avoir accéder à la box et au serveur HTTP sans problème.
-[![forthebadge made-with-python](https://media.discordapp.net/attachments/556442801085218827/558951107431235596/unknown.png)
+[forthebadge made-with-python](https://media.discordapp.net/attachments/556442801085218827/558951107431235596/unknown.png)
 
