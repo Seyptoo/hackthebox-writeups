@@ -65,4 +65,9 @@ N'oubliez pas d'attribuer le domaine sur le fichier /etc/hosts. Pour justement a
 Comme vous pouvez le voir il y'a un dossier /admin, /test, /backup et /dev, nous allons un peu regarder le dossier /admin de plus près.
 
 [![forthebadge made-with-python](https://cdn.discordapp.com/attachments/556442801085218827/558962528311443466/unknown.png)
+Comme vous pouvez le voir, il y'a un fichier javascript /login.js donc dans ce fichier il y'a sans doute le nom d'utilisateur et le mot de passe.
+
+
+
+
 
