@@ -181,7 +181,7 @@ Shell > User.txt
     www-data@frolic:~/html/playsms$ cd /home/ayush
     www-data@frolic:/home/ayush$ wc -c user.txt
     33 user.txt
-    
-kopijopijiop
+   
+Voilà nous avons accès en tant que www-data nous avons un shell.
     
     
