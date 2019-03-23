@@ -61,8 +61,9 @@ N'oubliez pas d'attribuer le domaine sur le fichier /etc/hosts. Pour justement a
     /test (Status: 301)
     /dev (Status: 301)
     /backup (Status: 301)
+    /playsms (Status: 301)
 
-Comme vous pouvez le voir il y'a un dossier /admin, /test, /backup et /dev, nous allons un peu regarder le dossier /admin de plus près.
+Comme vous pouvez le voir il y'a un dossier /admin, /test, /backup, /dev et enfin /playsms nous allons un peu regarder le dossier /admin de plus près.
 
 [![forthebadge made-with-python](https://cdn.discordapp.com/attachments/556442801085218827/558962528311443466/unknown.png)
 Comme vous pouvez le voir, il y'a un fichier javascript /login.js donc dans ce fichier il y'a sans doute le nom d'utilisateur et le mot de passe.
@@ -73,4 +74,95 @@ Comme vous pouvez le voir, il y'a un fichier javascript /login.js donc dans ce f
     if ( username == "admin" && password == "superduperlooperpassword_lol"){
     alert ("Login successfully");
     [...SNIP...]
+    
+Donc nous avons l'utilisateur et le mot de passe pour se connecter sur la page d'administration et de voir concrètement les informations utiles sur cette page.
+
+    root@Computer:~/htb/box/Frolic# curl http://forlic.htb:9999/admin/success.html
+    ..... ..... ..... .!?!! .?... ..... ..... ...?. ?!.?. ..... ..... .....
+    ..... ..... ..!.? ..... ..... .!?!! .?... ..... ..?.? !.?.. ..... .....
+    ....! ..... ..... .!.?. ..... .!?!! .?!!! !!!?. ?!.?! !!!!! !...! .....
+    ..... .!.!! !!!!! !!!!! !!!.? ..... ..... ..... ..!?! !.?!! !!!!! !!!!!
+    !!!!? .?!.? !!!!! !!!!! !!!!! .?... ..... ..... ....! ?!!.? ..... .....
+    ..... .?.?! .?... ..... ..... ...!. !!!!! !!.?. ..... .!?!! .?... ...?.
+    ?!.?. ..... ..!.? ..... ..!?! !.?!! !!!!? .?!.? !!!!! !!!!. ?.... .....
+    ..... ...!? !!.?! !!!!! !!!!! !!!!! ?.?!. ?!!!! !!!!! !!.?. ..... .....
+    ..... .!?!! .?... ..... ..... ...?. ?!.?. ..... !.... ..... ..!.! !!!!!
+    !.!!! !!... ..... ..... ....! .?... ..... ..... ....! ?!!.? !!!!! !!!!!
+    !!!!! !?.?! .?!!! !!!!! !!!!! !!!!! !!!!! .?... ....! ?!!.? ..... .?.?!
+    .?... ..... ....! .?... ..... ..... ..!?! !.?.. ..... ..... ..?.? !.?..
+    !.?.. ..... ..!?! !.?.. ..... .?.?! .?... .!.?. ..... .!?!! .?!!! !!!?.
+    ?!.?! !!!!! !!!!! !!... ..... ...!. ?.... ..... !?!!. ?!!!! !!!!? .?!.?
+    !!!!! !!!!! !!!.? ..... ..!?! !.?!! !!!!? .?!.? !!!.! !!!!! !!!!! !!!!!
+    !.... ..... ..... ..... !.!.? ..... ..... .!?!! .?!!! !!!!! !!?.? !.?!!
+    !.?.. ..... ....! ?!!.? ..... ..... ?.?!. ?.... ..... ..... ..!.. .....
+    ..... .!.?. ..... ...!? !!.?! !!!!! !!?.? !.?!! !!!.? ..... ..!?! !.?!!
+    !!!!? .?!.? !!!!! !!.?. ..... ...!? !!.?. ..... ..?.? !.?.. !.!!! !!!!!
+    !!!!! !!!!! !.?.. ..... ..!?! !.?.. ..... .?.?! .?... .!.?. ..... .....
+    ..... .!?!! .?!!! !!!!! !!!!! !!!?. ?!.?! !!!!! !!!!! !!.!! !!!!! .....
+    ..!.! !!!!! !.?.
+
+Ça ressemble beaucoup à Ook, donc nous allons déchiffrer cela sur un site directement et de voir le résultat final. un lien pour déchiffrer le message. https://www.dcode.fr/langage-ook.
+
+Le message déchiffrer est : Nothing here check /asdiSIAJJ0QWE9JAS. Ça ressemble beaucoup à un chemin HTTP donc nous allons voir ça. Donc dans ce dossier il y'a rien de spécial, il y'a du base64 donc je vais essayer de trouver des fichiers assez spécifiques.
+
+    root@Computer:~/htb/box/Frolic/gobuster# gobuster -w /usr/share/wordlist/directory-list-2.3-medium.txt -u http://10.10.10.111:9999/asdiSIAJJ0QWE9JAS/ -x zip,html,php
+
+    Gobuster v1.4.1              OJ Reeves (@TheColonial)
+    =====================================================
+    =====================================================
+    [+] Mode         : dir
+    [+] Url/Domain   : http://10.10.10.111:9999/asdiSIAJJ0QWE9JAS/
+    [+] Threads      : 10
+    [+] Wordlist     : /usr/share/wordlist/directory-list-2.3-medium.txt
+    [+] Status codes : 301,302,307,200,204
+    [+] Extensions   : .zip,.html,.php
+    =====================================================
+    /crack.zip (Status: 200)
+    /index.php (Status: 200)
+    
+Donc comme vous pouvez le voir il y'a un fichier crack.zip. Donc quand j'essaye de unzip le fichier, le fichier est sécurisé par un mot de passe donc je vais essayer de bruteforce ça pour trouver le mot de passe et de extraire les fichiers.
+
+    root@Computer:~/htb/box/Frolic/gobuster# 7z l crack.zip 
+
+    7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+    p7zip Version 9.20 (locale=fr_FR.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+
+    Listing archive: crack.zip
+
+    --
+    Path = crack.zip
+    Type = zip
+    Physical Size = 360
+
+       Date      Time    Attr         Size   Compressed  Name
+    ------------------- ----- ------------ ------------  ------------------------
+    2018-09-23 13:44:05 .....          617          176  index.php
+    ------------------- ----- ------------ ------------  ------------------------
+                                       617          176  1 files, 0 folders
+                                  
+Donc il y'a un fichier php donc nous allons bruteforce le fichier et de voir les informations nécessaires.
+
+    root@Computer:~/htb/box/Frolic/gobuster# fcrackzip --verbose --use-unzip --dictionary --init-password rockyou.txt crack.zip 
+    found file 'index.php', (size cp/uc    176/   617, flags 9, chk 89c3)
+
+
+    PASSWORD FOUND!!!!: pw == password
+    
+Donc le mot de passe c'est un mot de passe assez vulnérable donc je vais extraire le fichier zip avec la commande unzip. Du coup après avoir extraire le fichier nous avons un fichier php, et quand nous avons le fichier, le fichier est chiffré.
+
+    root@Computer:~/htb/box/Frolic/gobuster# cat index.php|xxd -r -p|base64 -d > brainfuck 2>/dev/null                                                      
+    root@Computer:~/htb/box/Frolic/gobuster# cat brainfuck 
+    +++++ +++++ [->++ +++++ +++<] >++++ +.--- --.++ +++++ .<+++ [->++ +<]>+
+    ++.<+ ++[-> ---<] >---- --.-- ----- .<+++ +[->+ +++<] >+++. <+++[ ->---
+    <]>-- .<+++ [->++ +<]>+ .---. <+++[ ->--- <]>-- ----. <++++ [->++ ++<]>
+    ++..<
+    
+Donc concrètement pour déchiffrer cela c'est du brainfuck, c'est un langage de programmation donc pour déchiffrer il faut aller sur le site https://www.dcode.fr/langage-ook.
+Brainfuck déchiffrer : idkwhatispass
+
+Donc après avoir chercher pendant quelques temps, j'ai réussis à me connecter en tant que admin sur /playsms donc pour la connexion.
+
+Username : admin</br>
+Password : idkwhatispass<br/>
+
 
