@@ -25,7 +25,7 @@ Alors concrètement il y'a 2 ports ouvert le SSH pour le 22 et le HTTP pour le 8
 HTTP
 ----
 
-Quand nous envoyions une rêquete HTTP avec curl, on peut constater que il y'a un fichier spécial nommé secret.txt. Nous allons essayer de voir ce fichier.
+Quand nous envoyions une rêquete HTTP avec curl, on peut constater que il y'a un fichier spécial nommé secret.txt. Nous allons essayer de lire ce fichier texte.
 
     root@Computer:~/htb/writeup/Curling# curl http://10.10.10.150
     [...SNIP...]
