@@ -39,7 +39,44 @@ Quand nous envoyions une rêquete HTTP avec curl, on peut constater que il y'a u
     
 Ceci ressemble à un mot de passe, probablement pour le CMS. Il y'a aussi un nom d'utilisateur dans un article ça pourrais nous servir.
 
+[![forthebadge made-with-python](https://cdn.discordapp.com/attachments/556442801085218827/561556044367527979/unknown.png)]
 
-    
+J'ai pas encore lancé de gobuster je vais lancé ça automatiquement.
+
+Gobuster
+----
+    root@seyptoo-Aspire-E5-721:~/htb/writeup/Curling# gobuster -w /usr/share/wordlist/directory-list-2.3-medium.txt -u http://10.10.10.150 -o output-gobuster.log
+
+    Gobuster v1.4.1              OJ Reeves (@TheColonial)
+    =====================================================
+    =====================================================
+    [+] Mode         : dir
+    [+] Url/Domain   : http://10.10.10.150/
+    [+] Threads      : 10
+    [+] Wordlist     : /usr/share/wordlist/directory-list-2.3-medium.txt
+    [+] Output file  : output-gobuster.log
+    [+] Status codes : 200,204,301,302,307
+    =====================================================
+    /images (Status: 301)
+    /media (Status: 301)
+    /templates (Status: 301)
+    /modules (Status: 301)
+    /bin (Status: 301)
+    /plugins (Status: 301)
+    /includes (Status: 301)
+    /language (Status: 301)
+    /components (Status: 301)
+    /cache (Status: 301)
+    /libraries (Status: 301)
+    /tmp (Status: 301)
+    /layouts (Status: 301)
+    /administrator (Status: 301)
+
+ Nous avons beaucoup de dossiers, on va s'intéréssé à la page d'administration, le CMS utilisé est Joomla. J'ai essayer avec plusieurs utilisateur notamment avec admin, administrator etc.. et finalement l'utilisateur est floris et le mot de passe est Curling2018!.
+ 
+ Username : floris
+ Password : Curling2018
+ 
+ 
 
   
