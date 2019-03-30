@@ -72,10 +72,14 @@ Gobuster
     /layouts (Status: 301)
     /administrator (Status: 301)
 
- Nous avons beaucoup de dossiers, on va s'intéréssé à la page d'administration, le CMS utilisé est Joomla. J'ai essayer avec plusieurs utilisateur notamment avec admin, administrator etc.. et finalement l'utilisateur est floris et le mot de passe est Curling2018!.
+ Nous avons beaucoup de dossiers, on va s'intéréssé à la page d'administration, le CMS utilisé est Joomla. J'ai essayer avec plusieurs utilisateur notamment avec admin, administrator etc.. et finalement l'utilisateur est floris et le mot de passe est Curling2018!. La connexion fonctionne avec succès.
  
  Username : floris<br />
  Password : Curling2018
+ 
+ Joomla
+ ----
+ 
  
  
 
