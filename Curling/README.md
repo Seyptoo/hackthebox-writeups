@@ -133,9 +133,9 @@ PrivEsc
 ----
 Pour le privesc il y'a rien de bien compliqué il suffit de regarder le dossier admin-area dans /home/floris. Dans le fichier input vous devez simplement modifier la variable par file:///root/root.txt pour lire le fichier root.txt. Et lisez rapidement le fichier report avant que quelqu'un d'autre modifie le fichier input.
 
-file input  :
+file input  : <br />
 url = "file://root/root.txt" <br />
 file output : <br />
-    82c198ab6f[...SNIP...]
+    82c198ab6f[...SNIP...] <br />
  
   
