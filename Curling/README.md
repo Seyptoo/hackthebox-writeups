@@ -106,7 +106,7 @@ Shell > User.txt
     
 Comme vous pouvez le voir il y'a un fichier password_backup, le fichier user.txt est impossible à lire car nous avons pas les permissions de lire ce fichier. Donc je vais transférer le fichier password_backup vers ma machine physique.
 
-[![forthebadge made-with-python](https://im.ezgif.com/tmp/ezgif-1-6c0da889e0b9.gif)]
+[![forthebadge made-with-python](https://raw.githubusercontent.com/Seyptoo/hackthebox-writeups/master/Curling/ezgif-1-a824488cc5ec.gif)]
 
 Donc une fois que le fichier a été transférer nous pouvons jouer avec le fichier backup. Alors concrètement si nous regardons le fichier c'est un fichier en hex, nous allons utillisé la commande xxd pour convertir ça en binaire.
 
