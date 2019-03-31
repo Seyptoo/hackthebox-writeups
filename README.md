@@ -9,4 +9,4 @@ Website : https://www.hackthebox.eu/
 **Information**
 On this repository I will show you the writeups once the boxes are removed and show you the simple things. 
 
-The solutions of HackTheBox machines ! :D
+
