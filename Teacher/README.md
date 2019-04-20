@@ -224,6 +224,7 @@ Dans ce cas il y'a rien de bien compliqué nous allons simplement supprimerl les
     giovanni@teacher:~$ rm -rf /home/giovanni/work/tmp
     giovanni@teacher:~$ cd /home/giovanni/work
     giovanni@teacher:/home/giovanni/work$ ln -s /root tmp
+    giovanni@teacher:/home/giovanni/work$ cd tmp
     giovanni@teacher:/home/giovanni/work/tmp$ wc -c root.txt
     33 root.txt
 
