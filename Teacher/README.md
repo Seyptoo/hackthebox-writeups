@@ -235,7 +235,6 @@ Le travail cron change les autorisations en 777 lorsqu'il extrait l'archive de s
     giovanni@teacher:~/work/tmp$ rm -rf courses
     giovanni@teacher:~/work/tmp$ ln -s /etc courses
     giovanni@teacher:~/work/tmp$ ls -l / | grep etc
-    ls -l / | grep etc
     drwxrwxrwx 85 root root  4096 Apr 18 21:55 etc
     
 Comme vous pouvez le voir nous avons les permissions d'écrire et de lire n'importe quelle fichier dans le dossier /etc. Je vais créer un mot de passe avec mkpasswd pour mettre cela dans le fichier passwd
