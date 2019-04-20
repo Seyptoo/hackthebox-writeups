@@ -107,7 +107,7 @@ Effectivement si nous avons des informations et que dans le mot de passe Th4C00l
         req = Teacher()
         req.send_req()
 
-Donc si nous lance le script :
+Donc si nous lançons le script :
 
     root@Seyptoo:~/htb/writeup/Teacher# python teacher_bf.py 
     [-] Password not cracked : Th4C00lTheacha*
