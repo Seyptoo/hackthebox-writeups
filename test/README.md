@@ -93,4 +93,36 @@ HTTP Connect
 https://image.noelshack.com/fichiers/2019/17/2/1556044762-capture-du-2019-04-23-20-39-12.png)](
 https://image.noelshack.com/fichiers/2019/17/2/1556044762-capture-du-2019-04-23-20-39-12.png)
 
-Once connected, you can access the path for upload file.
+Once connected, you can access the path for upload file and try to enumerate on this path and see if we can put any file and testing. When I try to import a PHP file, unfortunately I do not have the permissions.
+
+[![forthebadge made-with-python](
+https://image.noelshack.com/fichiers/2019/17/2/1556045157-capture-du-2019-04-23-20-45-31.png)](
+https://image.noelshack.com/fichiers/2019/17/2/1556045157-capture-du-2019-04-23-20-45-31.png)
+
+Since I do not have access, I decided to create my own extension list and test with burp suite.
+
+    root@Seyptoo:/home/seyptoo# cat list.ext 
+    jpg
+    php
+    php5
+    php7
+    png
+    rb
+    py
+    config
+    xml
+    asp
+    aspx
+    
+This is my list for the attack.
+
+[![forthebadge made-with-python](
+https://image.noelshack.com/fichiers/2019/17/2/1556045685-capture-du-2019-04-23-20-52-01.png)](
+https://image.noelshack.com/fichiers/2019/17/2/1556045685-capture-du-2019-04-23-20-52-01.png)
+
+[![forthebadge made-with-python](
+https://image.noelshack.com/fichiers/2019/17/2/1556045724-capture-du-2019-04-23-20-52-42.png)](
+https://image.noelshack.com/fichiers/2019/17/2/1556045724-capture-du-2019-04-23-20-52-42.png)
+
+
+
