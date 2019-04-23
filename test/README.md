@@ -72,3 +72,25 @@ On the HTTP server it is a connection form so currently I have no information on
 [![forthebadge made-with-python](
 https://image.noelshack.com/fichiers/2019/17/2/1556044461-capture-du-2019-04-23-20-34-07.png)](
 https://image.noelshack.com/fichiers/2019/17/2/1556044461-capture-du-2019-04-23-20-34-07.png)
+
+So let's try to enumerate the SNMP protocol to gain access.
+
+SNMP Enumeration
+----
+    root@Seyptoo:/var/www/html# snmpwalk -c public -v1 192.168.0.21
+    [...SNIP...]
+    iso.3.6.1.2.1.1.6.0 = STRING: "HTTP Credentials : admin:P3ssW0rdCr3ck3d!@:;"
+    iso.3.6.1.2.1.1.7.0 = INTEGER: 72
+    iso.3.6.1.2.1.1.8.0 = Timeticks: (116) 0:00:01.16
+    iso.3.6.1.2.1.1.9.1.2.1 = OID: iso.3.6.1.6.3.11.3.1.1
+    [...SNIP...]
+    
+As you can see above, we managed to find the credentials to log on to the admin page.
+
+HTTP Connect
+----
+[![forthebadge made-with-python](
+https://image.noelshack.com/fichiers/2019/17/2/1556044762-capture-du-2019-04-23-20-39-12.png)](
+https://image.noelshack.com/fichiers/2019/17/2/1556044762-capture-du-2019-04-23-20-39-12.png)
+
+Once connected, you can access the path for upload file.
