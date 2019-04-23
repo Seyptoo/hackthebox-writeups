@@ -65,3 +65,10 @@ We will also do a UDP scan on the server. As you can see below there is the SNMP
     Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 2.43 seconds
 
+HTTP
+----
+On the HTTP server it is a connection form so currently I have no information on the identifiers to connect.
+
+[![forthebadge made-with-python](
+https://image.noelshack.com/fichiers/2019/17/2/1556044461-capture-du-2019-04-23-20-34-07.png)](
+https://image.noelshack.com/fichiers/2019/17/2/1556044461-capture-du-2019-04-23-20-34-07.png)
