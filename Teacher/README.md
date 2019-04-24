@@ -4,9 +4,9 @@
 
 Résumé : <br />
 
-La boîte Teacher étais une boîte assez intéréssante et très amusante, le niveau étais assez simple, juste une bonne enumération étais amplement suffisante. <br />
+La boîte Teacher était une boîte assez intéressante et très amusante, le niveau était assez simple, juste une bonne énumération était amplement suffisante. <br />
 
-- Il y'a un fichier sensible dans le dossier /images ou il y'a un code HTTP 200 ou il y'avais un mot de passe sensible mais il manquait un caractère à la fin du mot de passe. <br />
+- Il y a un fichier sensible dans le dossier /images où il y a un code HTTP 200 ou il y'avais un mot de passe sensible mais il manquait un caractère à la fin du mot de passe. <br />
 
 - Ensuite il y'avais un CMS dans le dossier /moodle, et j'ai créer un petit script pour trouver le bon mot de passe. <br />
 
