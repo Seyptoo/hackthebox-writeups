@@ -2,7 +2,7 @@
 
 Cette outil permet de récupérer les identifications d'un système Windows, il a été integré dans le programme impacket donc l'utilisation de ce programme n'est pas très compliqué.
 
-![frustrated-computer-baboon](https://media.giphy.com/media/Q6gPyUYrCk76g/giphy.gif)
+![frustrated-computer-baboon](giphy.gif)
 
     $ secretsdump.py -debug -sam sam_windows -system system_windows LOCAL
     Impacket v0.9.20-dev - Copyright 2019 SecureAuth Corporation
