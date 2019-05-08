@@ -1,5 +1,9 @@
 # Sam Windows
 
+Cette outil permet de récupérer les identifications d'un système Windows, il a été integré dans le programme impacket donc l'utilisation de ce programme n'est pas très compliqué.
+
+[![forthebadge made-with-python](https://media.giphy.com/media/Q6gPyUYrCk76g/giphy.gif)
+
     $ secretsdump.py -debug -sam sam_windows -system system_windows LOCAL
     Impacket v0.9.20-dev - Copyright 2019 SecureAuth Corporation
 
