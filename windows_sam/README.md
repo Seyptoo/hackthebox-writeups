@@ -1,8 +1,6 @@
 # Sam Windows
 
-Cette outil permet de récupérer les identifications d'un système Windows, il a été integré dans le programme impacket donc l'utilisation de ce programme n'est pas très compliqué.
-
-![frustrated-computer-baboon](giphy.gif)
+Cet outil permet de récupérer les identifications d'un système Windows, il a été integré dans le programme impacket donc l'utilisation de ce programme n'est pas très compliqué.
 
     $ secretsdump.py -debug -sam sam_windows -system system_windows LOCAL
     Impacket v0.9.20-dev - Copyright 2019 SecureAuth Corporation
@@ -26,4 +24,6 @@ Cette outil permet de récupérer les identifications d'un système Windows, il 
     Seyptoo:1000:aad3b435b51404eeaad3b435b51404ee:ee7e0b247f06ef203cf92ad55eeb2d13:::
     [*] Cleaning up... 
 
-L'option -debug permet d'afficher des informations détaillés, l'option -sam permet de spécifier le fichier SAM, l'option -system permet de mettre le fichier système pour ensuite dump les informations d'identification et enfin l'option LOCAL permet d'analyser le fichier c'est obligatoire.
+L'option -debug permet d'afficher des informations détaillées, l'option -sam permet de spécifier le fichier SAM, l'option -system permet de mettre le fichier système pour ensuite dump les informations d'identification et enfin l'option LOCAL permet d'analyser le fichier. C'est obligatoire de mettre l'option LOCAL.
+
+![frustrated-computer-baboon](giphy.gif)
