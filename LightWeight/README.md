@@ -31,7 +31,7 @@ Nmap Scan
     Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
     Nmap done: 1 IP address (1 host up) scanned in 39.45 seconds
     
-Parfait nous avons 3 ports, le SSH, le HTTP, et enfin pour l'Active directory le protocole LDAP.
+Parfait nous avons 3 ports, le SSH, le HTTP, et enfin pour le protocole LDAP.
 Nous allons énumerer les services ouverts.
 
 HTTP
