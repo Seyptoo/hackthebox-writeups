@@ -328,8 +328,7 @@ Après avoir exécuté le code powershell nous avons un shell, mais le problème
 
 PrivEsc
 ----
-Le privesc n'est pas très compliqué sur la machine nous allons taper la commande ci-dessous. En exécutant whoami /priv, nous voyons que les droits de l'utilisateur nous permettront d'utiliser l'exploit RottenPotato pour s'élever à NTAUTORITY/SYSTEM. 
-C:\Windows\SysWOW64\inetsrv>whoami /priv
+Le privesc n'est pas très compliqué sur la machine nous allons taper la commande ci-dessous. En exécutant whoami /priv, nous voyons que les droits de l'utilisateur nous permettront d'utiliser l'exploit juicy-potato pour s'élever à NTAUTORITY/SYSTEM. 
 
 	
 	C:\Users\Windows\System32>whoami /priv
