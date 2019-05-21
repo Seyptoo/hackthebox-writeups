@@ -16,7 +16,7 @@ La boîte Conceal était une boîte assez intéressante et très amusante, le ni
 - Une bonne configuration pour avoir accès, avec le protocole IPSEC avec le programme StrongSwan. <br />
 - Nous devons créer un point de routage avec IPSEC pour rediriger les ports et d'accéder à la machine. <br />
 - On peut upload des fichiers dans le FTP, et ensuite d'exécuter le script dans la page web et faire son reverse shell. <br />
-- Pour l'accès admin, SeImpersonatePrivilege est activé donc on peut utiliser le programme Potato.
+- Pour l'accès admin, SeImpersonatePrivilege est activé donc on peut utiliser le programme JuicyPotato.
 
 Source : <br />
 
